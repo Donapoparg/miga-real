@@ -1,0 +1,881 @@
+<!-- ... extracellular -->
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Miga Real Mayorista - Sándwiches de miga artesanales de alta rotación para kioscos y comercios. Reposición diaria con código EAN-13 y etiquetado térmico.">
+    <title>Miga Real - Sándwiches de Miga Mayoristas</title>
+    
+    <!-- Preload critical fonts & assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" as="style">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Preconnect for fast script loading -->
+    <link rel="preconnect" href="https://esm.sh" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        migaPrimary: '#0F172A',
+                        migaGold: '#D97706',
+                        migaGoldHover: '#B45309',
+                        migaGreen: '#16A34A',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950 overflow-x-hidden">
+    <div id="root"></div>
+
+    <script type="text/babel" data-type="module">
+        import React, { useState, useEffect, useRef, memo } from 'https://esm.sh/react@18.2.0';
+        import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
+        import { 
+            Send, Store, Phone, MapPin, Clock, ShoppingBag, ArrowLeft, 
+            Menu, X, ArrowRight, RefreshCw, Package, ShieldCheck, 
+            Calculator, BarChart3, Coins, ChevronDown, ChevronUp, FileText, Shield, Utensils, Image as ImageIcon, Download, Share2, Award, Sparkles
+        } from 'https://esm.sh/lucide-react@0.292.0';
+
+        // ==========================================
+        // DATOS CENTRALIZADOS Y SEGURIDAD
+        // ==========================================
+        const _p = ["549", "11", "3823", "5784"];
+        const getSecurePhone = () => _p.join('');
+        const getSecureWaLink = (text = "¡Hola Miga Real! Quisiera consultar stock y condiciones mayoristas para mi comercio.") => {
+            return `https://wa.me/${getSecurePhone()}?text=${encodeURIComponent(text)}`;
+        };
+
+        const DATA = {
+            b2bBenefits: [
+                { icon: RefreshCw, title: "Reposición Diaria", desc: "Coordinamos los pedidos con 24 horas de anticipación para garantizar reposición diaria y heladeras con stock fresco en todo momento.", color: "text-amber-500", bg: "bg-amber-500/10" },
+                { icon: Package, title: "Etiquetado EAN-13 y Seguridad", desc: "Código de barras, fechas de elaboración/vencimiento y un sello de seguridad para el comprador que se rompe al abrir, garantizando que nadie lo manipuló.", color: "text-orange-500", bg: "bg-orange-500/10" },
+                { icon: Utensils, title: "Variedad Exclusiva", desc: "Contamos con una carta de variedades inigualable en el mercado que potencia las ventas de tu mostrador con opciones gourmet y tradicionales.", color: "text-green-500", bg: "bg-green-500/10" }
+            ],
+            products: [
+                { name: "Jamón y Queso Clásico", desc: "El sándwich de mayor rotación en kioscos. Pan de miga extra tierno y fiambres seleccionados.", badge: "Más Vendido", code: "7798123450012", tagColor: "bg-amber-500/10 text-amber-400", isSpecial: false, available: true },
+                { name: "Tomate, Lechuga y Queso", desc: "Opción vegetariana fresca y equilibrada para el almuerzo rápido de tus clientes.", badge: "Frescura Diaria", code: "7798123450029", tagColor: "bg-emerald-500/10 text-emerald-400", isSpecial: false, available: true },
+                { name: "Salame y Queso", desc: "Variedad con excelente margen para captar al cliente exigente que busca sabores intensos.", badge: "Exclusivo", code: "7798123450036", tagColor: "bg-purple-500/10 text-purple-400", isSpecial: false, available: true },
+                { name: "Aceituna y Queso", desc: "Delicada combinación de aceitunas verdes seleccionadas y cremoso queso cortado en finas láminas.", badge: "Especial", code: "7798123450043", tagColor: "bg-green-500/20 text-green-300 border border-green-500/30", isSpecial: true, available: true },
+                { name: "Roquefort con Jamón", desc: "Sabor gourmet intenso para los clientes que buscan una experiencia culinaria superior en el mostrador.", badge: "Próximamente", code: "7798123450050", tagColor: "bg-slate-700/50 text-slate-400 border border-slate-600/30", isSpecial: true, available: false }
+            ],
+            faqItems: [
+                { 
+                    question: "¿Cuál es la compra mínima para comercios?", 
+                    answer: "El pedido mínimo mayorista es de 16 envases. Recordá que cada envase contiene 2 exquisitos sándwiches listos para la venta, asegurando una excelente rotación y un stock inicial óptimo para tu mostrador." 
+                },
+                { 
+                    question: "¿Cómo se presentan los envases y cuántas unidades traen?", 
+                    answer: "Cada envase hermético incluye 2 generosos sándwiches de miga artesanales. Vienen con etiqueta térmica reglamentaria, código de barras EAN-13, fecha de elaboración, vencimiento y precinto de seguridad inviolable." 
+                },
+                { 
+                    question: "¿Cómo funciona la reposición diaria?", 
+                    answer: "Trabajamos con pedidos tomados con 24 horas de anticipación. Esto nos permite coordinar entregas diarias y garantizar que tus heladeras exhibidoras dispongan siempre de producto 100% fresco sin acumular stock innecesario." 
+                },
+                { 
+                    question: "¿Qué cuidados de refrigeración y cadena de frío se requieren?", 
+                    answer: "Al tratarse de sándwiches de miga artesanales y frescos elaborados sin conservantes químicos artificiales, es un requisito indispensable mantenerlos en heladera exhibidora entre 2°C y 5°C. Esto preserva la textura inigualable del pan de miga y garantiza la máxima seguridad alimentaria para tus clientes." 
+                },
+                { 
+                    question: "¿Cómo se coordinan los pagos y la entrega en el local?", 
+                    answer: "Una vez completado el formulario de pedido o vía WhatsApp, coordinamos directamente los días de reparto según la zona de tu comercio y los medios de pago habituales (efectivo, transferencia o cuenta corriente acordada)." 
+                }
+            ]
+        };
+
+        const BrandLogo = ({ className = "w-12 h-12" }) => {
+            const [customLogo, setCustomLogo] = useState(null);
+            const fileInputRef = useRef(null);
+
+            const handleImageUpload = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setCustomLogo(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            return (
+                <div 
+                    onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                    title="Haz clic para subir tu logo (se guardará en la carpeta img/ de tu repositorio)"
+                    className={`relative flex items-center justify-center rounded-2xl overflow-hidden bg-slate-900 border border-amber-500/40 shadow-md cursor-pointer group ${className}`}
+                >
+                    <input 
+                        type="file" 
+                        ref={fileInputRef} 
+                        onChange={handleImageUpload} 
+                        accept="image/*" 
+                        className="hidden" 
+                    />
+                    {customLogo ? (
+                        <img 
+                            src={customLogo} 
+                            alt="Tu Logo" 
+                            className="w-full h-full object-contain p-0.5 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" 
+                            style={{ imageRendering: '-webkit-optimize-contrast' }}
+                        />
+                    ) : (
+                        <div className="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center text-amber-400 text-[10px] font-bold text-center p-1 group-hover:bg-slate-800 transition-colors">
+                            <span>img/logo.png</span>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const ProductImageUploader = ({ productName, defaultImage }) => {
+            const [imageSrc, setImageSrc] = useState(defaultImage);
+            const fileInputRef = useRef(null);
+
+            const handleUpload = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setImageSrc(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            return (
+                <div 
+                    onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                    className="w-full h-40 sm:h-48 bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl mb-6 flex flex-col items-center justify-center border border-slate-800/60 relative overflow-hidden group cursor-pointer shadow-inner"
+                    title="Clic para subir la imagen de este producto (Guardar en carpeta img/ de GitHub)"
+                >
+                    <input 
+                        type="file" 
+                        ref={fileInputRef} 
+                        onChange={handleUpload} 
+                        accept="image/*" 
+                        className="hidden" 
+                    />
+                    
+                    {imageSrc ? (
+                        <img src={imageSrc} alt={productName} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    ) : (
+                        <>
+                            <div className="absolute inset-0 bg-amber-500/0 group-hover:bg-amber-500/5 transition-colors duration-300"></div>
+                            <ImageIcon className="w-10 h-10 text-slate-600 mb-2 group-hover:scale-110 group-hover:text-amber-500/80 transition-all duration-300" />
+                            <span className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">img/{productName.toLowerCase().replace(/ /g, '_')}.jpg</span>
+                        </>
+                    )}
+                    <div className="absolute bottom-2 right-2 bg-slate-950/85 backdrop-blur-sm text-amber-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-amber-500/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                        Subir / Cambiar
+                    </div>
+                </div>
+            );
+        };
+
+        const WhatsAppIcon = ({ className }) => (
+            <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+        );
+
+        const GlobalStyles = () => (
+            <style>{`
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+            .font-poppins { font-family: 'Poppins', sans-serif; }
+            .hero-bg {
+                background-color: #0F172A; 
+                background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                background-size: 32px 32px;
+                position: relative;
+            }
+            .hero-bg::before {
+                content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                background: radial-gradient(circle at 50% 35%, rgba(217, 119, 6, 0.18) 0%, transparent 70%);
+                pointer-events: none;
+            }
+            @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
+            .animate-float { animation: float 4s ease-in-out infinite; }
+            button, a, input { touch-action: manipulation; }
+            `}</style>
+        );
+
+        // ==========================================
+        // SUB-PÁGINAS
+        // ==========================================
+        const TermsPage = memo(({ onBack }) => {
+            useEffect(() => { window.scrollTo(0, 0); }, []);
+            return (
+                <div className="min-h-screen bg-slate-900 font-sans text-slate-100 p-6 md:p-12">
+                    <div className="max-w-4xl mx-auto bg-slate-800 p-8 md:p-12 rounded-3xl border border-slate-700 shadow-2xl">
+                        <button onClick={onBack} aria-label="Volver atrás" className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-700 px-4 py-2 rounded-full transition-colors">
+                            <ArrowLeft className="w-4 h-4" /> Volver al sitio principal
+                        </button>
+                        <h1 className="text-3xl md:text-4xl font-extrabold mb-6 text-white tracking-tight">Términos y Condiciones Comerciales Mayoristas</h1>
+                        <p className="text-xs text-amber-400 font-mono mb-8 bg-amber-500/10 p-3 rounded-xl border border-amber-500/20">Última actualización: Noviembre de 2026. Conforme a la legislación vigente de la República Argentina.</p>
+                        
+                        <div className="space-y-6 text-slate-300 text-sm md:text-base leading-relaxed">
+                            <section>
+                                <h2 className="text-xl font-bold text-white mb-2">1. Objeto y Ámbito de Aplicación</h2>
+                                <p>Las presentes condiciones regulan de manera exclusiva las relaciones comerciales de carácter mayorista entre <strong>Miga Real</strong> ("el Proveedor") y los comercios minoristas, almacenes, kioscos, autoservicios y estaciones de servicio ("el Cliente Comprador").</p>
+                            </section>
+                            <section>
+                                <h2 className="text-xl font-bold text-white mb-2">2. Requisitos de Compra Mínima y Múltiplos</h2>
+                                <p>El volumen mínimo de adquisición por pedido se fija en <strong>16 envases herméticos</strong> (32 unidades individuales). Los incrementos deberán realizarse estrictamente en múltiplos de 4 envases por los cortes de molde.</p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            );
+        });
+
+        const PrivacyPage = memo(({ onBack }) => {
+            useEffect(() => { window.scrollTo(0, 0); }, []);
+            return (
+                <div className="min-h-screen bg-slate-900 font-sans text-slate-100 p-6 md:p-12">
+                    <div className="max-w-4xl mx-auto bg-slate-800 p-8 md:p-12 rounded-3xl border border-slate-700 shadow-2xl">
+                        <button onClick={onBack} aria-label="Volver atrás" className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-700 px-4 py-2 rounded-full transition-colors">
+                            <ArrowLeft className="w-4 h-4" /> Volver al sitio principal
+                        </button>
+                        <h1 className="text-3xl md:text-4xl font-extrabold mb-6 text-white tracking-tight">Política de Privacidad y Protección de Datos</h1>
+                        <p className="text-xs text-emerald-400 font-mono mb-8 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">Ley N° 25.326 de Protección de Datos Personales.</p>
+                        
+                        <div className="space-y-6 text-slate-300 text-sm md:text-base leading-relaxed">
+                            <section>
+                                <h2 className="text-xl font-bold text-white mb-2">1. Recopilación de Información Comercial</h2>
+                                <p>Recopilamos datos estrictamente necesarios para la gestión de pedidos y logística de entrega en su comercio.</p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            );
+        });
+
+        const CommerceForm = memo(({ onBack }) => {
+            const [formData, setFormData] = useState({ 
+                nombreComercio: '', 
+                whatsapp: '', 
+                direccion: '', 
+                horario: '', 
+                recurrente: 'no', 
+                frecuencia: 'Semanal (Martes y Jueves)',
+                refCode: '',
+                _honeypot: '' 
+            });
+            const [order, setOrder] = useState({});
+            const [showError, setShowError] = useState(false);
+
+            const ORDER_PRODUCTS = [
+                { name: "Jamón y Queso Clásico", price: 2000, color: "text-amber-400", bg: "bg-amber-500/10", isSpecial: false, available: true },
+                { name: "Tomate, Lechuga y Queso", price: 2000, color: "text-emerald-400", bg: "bg-emerald-500/10", isSpecial: false, available: true },
+                { name: "Salame y Queso", price: 2000, color: "text-purple-400", bg: "bg-purple-500/10", isSpecial: false, available: true },
+                { name: "Aceituna y Queso", price: 2000, color: "text-green-400", bg: "bg-green-500/20 border border-green-500/30", isSpecial: true, available: true },
+                { name: "Roquefort con Jamón", price: 2000, color: "text-slate-400", bg: "bg-slate-800/50 border border-slate-700/30", isSpecial: true, available: false }
+            ];
+
+            const handleChange = (e) => setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+            
+            const updateQty = (product, val) => {
+                setOrder(prev => {
+                    const newOrder = { ...prev, [product]: Math.max(0, val) };
+                    if (newOrder[product] === 0) delete newOrder[product];
+                    return newOrder;
+                });
+                setShowError(false);
+            };
+
+            const totalPacks = Object.values(order).reduce((acc, val) => acc + val, 0);
+            const totalAmount = totalPacks * 2000;
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (formData._honeypot) return;
+
+                if (totalPacks < 16) {
+                    setShowError(true);
+                    return;
+                }
+                
+                let orderText = "";
+                for (const [prod, qty] of Object.entries(order)) {
+                    orderText += `- ${qty}x envases de ${prod}\n`;
+                }
+
+                let subText = formData.recurrente === 'si' ? `\n🔄 *Suscripción Recurrente:* Sí (${formData.frecuencia})` : '\n🔄 *Suscripción Recurrente:* No (Pedido Único)';
+                let refText = formData.refCode ? `\n🤝 *Kiosco Referidor:* ${formData.refCode}` : '';
+
+                const message = `¡Hola Miga Real! 👋\n\nQuiero realizar el siguiente pedido mayorista:\n\n🛒 *DETALLE DE LA COMANDA*\n${orderText}\n*Total Envases:* ${totalPacks} un.\n*Monto Total:* $${totalAmount.toLocaleString('es-AR')}${subText}${refText}\n\n🏪 *DATOS DE ENTREGA*\n*Comercio:* ${formData.nombreComercio}\n*WhatsApp:* ${formData.whatsapp}\n*Dirección:* ${formData.direccion}\n*Horario:* ${formData.horario}\n\nAguardamos confirmación. ¡Gracias!`;
+                
+                window.open(getSecureWaLink(message), '_blank', 'noopener,noreferrer');
+            };
+            
+            useEffect(() => { window.scrollTo(0, 0); }, []);
+
+            return (
+                <div className="min-h-screen bg-slate-950 font-sans text-slate-100 flex flex-col">
+                    <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-4 py-3 sm:px-6 lg:px-8 flex items-center justify-between shadow-lg">
+                        <button onClick={onBack} aria-label="Volver atrás" className="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-all bg-slate-900 hover:bg-slate-800 px-4 py-2 rounded-full border border-slate-700/80 active:scale-95">
+                            <ArrowLeft className="w-4 h-4" /> <span className="hidden sm:inline">Volver</span>
+                        </button>
+                        <div className="flex items-center gap-2.5">
+                            <BrandLogo className="w-9 h-9 sm:w-10 sm:h-10" />
+                            <span className="text-lg sm:text-xl font-extrabold tracking-tight text-white">
+                                MIGA <span className="text-amber-500">REAL</span>
+                            </span>
+                        </div>
+                        <div className="w-20 sm:w-24 text-right">
+                            <span className="text-[10px] sm:text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">Seguro 🔒</span>
+                        </div>
+                    </header>
+
+                    <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+                        <div className="text-center mb-10">
+                            <span className="text-amber-400 font-bold tracking-wider uppercase text-xs bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">Comanda Digital Mayorista</span>
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mt-3 mb-3 text-white">Armá tu <span className="text-amber-500">Pedido</span></h1>
+                            <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">Seleccioná las variedades para tu mostrador, incluyendo nuestros sabores especiales exclusivos, y programá tus reposiciones.</p>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative">
+                            {/* Panel Izquierdo: Productos y Opciones B2B */}
+                            <div className="lg:col-span-7 space-y-8">
+                                <div>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="w-8 h-8 rounded-full bg-amber-500 flex shrink-0 items-center justify-center text-slate-950 font-bold">1</div>
+                                        <h2 className="text-xl sm:text-2xl font-bold text-white">Elegí tus Variedades</h2>
+                                    </div>
+                                    <p className="text-sm text-slate-400 ml-11 mb-6">
+                                        Pedido mínimo de <strong>16 envases</strong>. Múltiplos de 4 por molde de producción.
+                                    </p>
+                                    
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {ORDER_PRODUCTS.map(prod => (
+                                            <div key={prod.name} className={`p-5 rounded-3xl border transition-all flex flex-col justify-between group relative overflow-hidden backdrop-blur-md ${!prod.available ? 'opacity-60 bg-slate-950/40 border-slate-800' : prod.isSpecial ? 'bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/30 border-amber-500/50 shadow-xl shadow-amber-500/10' : 'bg-slate-900/80 border-slate-800 hover:border-amber-500/40 shadow-md'}`}>
+                                                {prod.isSpecial && (
+                                                    <div className={`absolute top-0 right-0 ${prod.available ? 'bg-gradient-to-l from-amber-500 to-orange-500 text-slate-950' : 'bg-slate-700 text-slate-300'} text-[10px] font-extrabold uppercase px-3.5 py-1 rounded-bl-xl shadow-md flex items-center gap-1 tracking-wider`}>
+                                                        <Sparkles className="w-3 h-3" /> {prod.available ? 'Especial' : 'Próximamente'}
+                                                    </div>
+                                                )}
+                                                <div className="mb-4">
+                                                    <div className="flex justify-between items-start mb-2">
+                                                        <div className={`p-2.5 rounded-2xl ${prod.bg}`}>
+                                                            <Package className={`w-5 h-5 ${prod.color}`} />
+                                                        </div>
+                                                        <span className="text-[10px] font-bold text-slate-400 bg-slate-950 px-2.5 py-1 rounded-md border border-slate-800">x2 unid.</span>
+                                                    </div>
+                                                    <h3 className="font-bold text-base sm:text-lg text-slate-100 group-hover:text-amber-400 transition-colors">{prod.name}</h3>
+                                                    <p className="text-sm text-slate-400 mt-1">{prod.available ? `$${prod.price.toLocaleString('es-AR')} /envase` : 'No disponible temporalmente'}</p>
+                                                </div>
+                                                
+                                                {prod.available ? (
+                                                    <div className="flex items-center justify-between rounded-2xl p-1.5 border bg-slate-950 border-slate-800">
+                                                        <button type="button" onClick={() => updateQty(prod.name, (order[prod.name] || 0) - 4)} className="w-10 h-10 rounded-xl flex items-center justify-center font-bold border transition-all text-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-700 active:scale-95">-</button>
+                                                        <span className="w-12 text-center font-bold text-lg text-white">{order[prod.name] || 0}</span>
+                                                        <button type="button" onClick={() => updateQty(prod.name, (order[prod.name] || 0) + 4)} className="w-10 h-10 rounded-xl flex items-center justify-center font-bold transition-all text-lg bg-amber-500 hover:bg-amber-600 text-slate-950 active:scale-95 shadow-md shadow-amber-500/20">+</button>
+                                                    </div>
+                                                ) : (
+                                                    <div className="text-center py-2 bg-slate-900 rounded-xl border border-slate-800 text-xs font-bold text-slate-500">
+                                                        Próximamente en stock
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Feature 2: Suscripción Mayorista B2B (Programación Recurrente) */}
+                                <div className="bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-4 shadow-xl">
+                                    <div className="flex items-center gap-2.5">
+                                        <div className="p-2 rounded-xl bg-amber-500/10 text-amber-500">
+                                            <RefreshCw className="w-5 h-5" />
+                                        </div>
+                                        <h3 className="font-bold text-white text-base sm:text-lg">Suscripción Mayorista (Programación Recurrente)</h3>
+                                    </div>
+                                    <p className="text-xs sm:text-sm text-slate-400">Automatizá tus entregas semanales para garantizar stock fresco permanente en tus heladeras.</p>
+                                    
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                                        <label className={`flex items-center gap-3 p-4 rounded-2xl border cursor-pointer transition-all ${formData.recurrente === 'no' ? 'bg-amber-500/10 border-amber-500 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'}`}>
+                                            <input type="radio" name="recurrente" value="no" checked={formData.recurrente === 'no'} onChange={handleChange} className="accent-amber-500 w-4 h-4" />
+                                            <span className="text-xs sm:text-sm font-bold">Pedido Único</span>
+                                        </label>
+                                        <label className={`flex items-center gap-3 p-4 rounded-2xl border cursor-pointer transition-all ${formData.recurrente === 'si' ? 'bg-amber-500/10 border-amber-500 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'}`}>
+                                            <input type="radio" name="recurrente" value="si" checked={formData.recurrente === 'si'} onChange={handleChange} className="accent-amber-500 w-4 h-4" />
+                                            <span className="text-xs sm:text-sm font-bold">Programar Recurrente</span>
+                                        </label>
+                                    </div>
+
+                                    {formData.recurrente === 'si' && (
+                                        <div className="pt-2 animate-fadeIn">
+                                            <label className="block text-xs font-bold text-slate-400 mb-2 ml-1">Frecuencia de Reposición Automática</label>
+                                            <select name="frecuencia" value={formData.frecuencia} onChange={handleChange} className="w-full px-4 py-3.5 text-sm bg-slate-950 border border-slate-800 rounded-2xl focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none text-white font-medium shadow-inner">
+                                                <option value="Semanal (Martes y Jueves)">Semanal (Martes y Jueves)</option>
+                                                <option value="Quincenal (Miércoles)">Quincenal (Miércoles)</option>
+                                                <option value="Reposición Diaria de Lunes a Sábados">Reposición Diaria de Lunes a Sábados</option>
+                                            </select>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Feature 3: Programa de Referidos ("Suma un Kiosco Amigo") */}
+                                <div className="bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-3 shadow-xl">
+                                    <div className="flex items-center gap-2.5">
+                                        <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
+                                            <Award className="w-5 h-5" />
+                                        </div>
+                                        <h3 className="font-bold text-white text-base sm:text-lg">Programa "Suma un Kiosco Amigo"</h3>
+                                    </div>
+                                    <p className="text-xs sm:text-sm text-slate-400">¿Tenés colegas con comercios? Si referís un nuevo kiosco, ambos obtienen beneficios logísticos especiales en sus próximos pedidos.</p>
+                                    <input 
+                                        type="text" 
+                                        name="refCode" 
+                                        value={formData.refCode} 
+                                        onChange={handleChange} 
+                                        placeholder="Nombre o dirección del Kiosco que te recomendó (opcional)" 
+                                        className="w-full px-4 py-3.5 text-sm bg-slate-950 border border-slate-800 rounded-2xl focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none text-white font-medium placeholder-slate-600 shadow-inner"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Panel Derecho: Datos de Entrega y Resumen */}
+                            <div className="lg:col-span-5 relative">
+                                <div className="lg:sticky lg:top-24 space-y-8">
+                                    <div className="bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-slate-950 font-bold">2</div>
+                                            <h2 className="text-xl font-bold text-white">Datos de Entrega</h2>
+                                        </div>
+                                        
+                                        <div className="space-y-4">
+                                            <div style={{ display: 'none' }} aria-hidden="true">
+                                                <input type="text" name="_honeypot" value={formData._honeypot} onChange={handleChange} tabIndex="-1" autoComplete="off" />
+                                            </div>
+                                            
+                                            {[ 
+                                                { label: "Nombre del Comercio", name: "nombreComercio", icon: Store, ph: "Ej. Kiosco El Paso", type: "text" }, 
+                                                { label: "WhatsApp (con código de área)", name: "whatsapp", icon: Phone, ph: "Ej. 11 1234 5678", type: "tel" }, 
+                                                { label: "Dirección de Recepción", name: "direccion", icon: MapPin, ph: "Calle, Número, Localidad", type: "text" }, 
+                                                { label: "Rango de Horarios de Atención", name: "horario", icon: Clock, ph: "Ej. Lunes a Sábados 8 a 20hs", type: "text" } 
+                                            ].map((field, idx) => (
+                                                <div key={idx}>
+                                                    <label htmlFor={field.name} className="block text-xs font-bold text-slate-400 mb-1.5 ml-1">{field.label}</label>
+                                                    <div className="relative group">
+                                                        <field.icon className="absolute left-4 top-3.5 w-4 h-4 text-slate-500 group-focus-within:text-amber-500 transition-colors" />
+                                                        <input 
+                                                            required 
+                                                            id={field.name}
+                                                            type={field.type} 
+                                                            name={field.name} 
+                                                            value={formData[field.name]} 
+                                                            onChange={handleChange} 
+                                                            className="w-full pl-11 pr-4 py-3.5 text-sm bg-slate-950 border border-slate-800 rounded-2xl focus:bg-slate-900 focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all font-medium text-white placeholder-slate-600 shadow-inner" 
+                                                            placeholder={field.ph} 
+                                                        />
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-1 rounded-3xl overflow-hidden shadow-2xl relative">
+                                        <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent pointer-events-none"></div>
+                                        <div className="bg-slate-950 rounded-[22px] p-6 sm:p-8 relative z-10">
+                                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-800 pb-3">Resumen de Pedido</h3>
+                                            
+                                            <div className="flex justify-between items-end mb-2">
+                                                <span className="text-slate-300 font-medium">Total Envases:</span>
+                                                <span className={`text-2xl font-extrabold ${totalPacks < 16 && totalPacks > 0 ? 'text-red-400' : 'text-white'}`}>{totalPacks} un.</span>
+                                            </div>
+                                            <div className="flex justify-between items-end mb-6">
+                                                <span className="text-slate-300 font-medium">Monto Estimado:</span>
+                                                <span className="text-3xl font-extrabold text-amber-400">${totalAmount.toLocaleString('es-AR')}</span>
+                                            </div>
+
+                                            {showError && (
+                                                <div className="mb-4 p-3.5 bg-red-500/10 border border-red-500/20 rounded-2xl text-center flex items-start gap-2.5">
+                                                    <span className="text-red-400 shrink-0 text-base">⚠️</span>
+                                                    <p className="text-red-400 text-xs sm:text-sm font-bold text-left leading-relaxed">
+                                                        El pedido mínimo es de 16 envases para precio mayorista. Faltan {16 - totalPacks} envases.
+                                                    </p>
+                                                </div>
+                                            )}
+
+                                            <button type="submit" className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-extrabold py-4 rounded-2xl shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 text-base active:scale-95">
+                                                <Send className="w-5 h-5" /> Confirmar y Enviar Comanda
+                                            </button>
+                                            
+                                            <p className="text-[10px] text-slate-500 text-center mt-4 flex items-center justify-center gap-1.5">
+                                                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Tus datos viajan seguros por WhatsApp (E2EE)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </main>
+                </div>
+            );
+        });
+
+        const LandingPage = ({ onNavigateToRegister, onNavigateToTerms, onNavigateToPrivacy }) => {
+            const [scrolled, setScrolled] = useState(false);
+            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+            const [packCount, setPackCount] = useState(32);
+            const [openFaq, setOpenFaq] = useState(null);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 20);
+                };
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const wholesalePricePerPack = 2000;
+            const suggestedRetailPrice = 3500;
+            const totalInvestment = packCount * wholesalePricePerPack;
+            const totalRevenue = packCount * suggestedRetailPrice;
+            const totalProfit = totalRevenue - totalInvestment;
+
+            const handleSliderChange = (e) => {
+                let val = parseInt(e.target.value);
+                if (val < 16) val = 16;
+                val = Math.round(val / 4) * 4;
+                setPackCount(val);
+            };
+
+            const toggleFaq = (index) => {
+                setOpenFaq(openFaq === index ? null : index);
+            };
+
+            const scrollToSection = (e, id) => {
+                e.preventDefault();
+                setIsMobileMenuOpen(false);
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            const handleDownloadCatalog = () => {
+                const catalogContent = `MIGA REAL - CATALOGO MAYORISTA 2026\n---------------------------------------\n\n1. Jamón y Queso Clásico - EAN: 7798123450012 ($2.000 x envase x2 unid.)\n2. Tomate, Lechuga y Queso - EAN: 7798123450029 ($2.000 x envase x2 unid.)\n3. Salame y Queso - EAN: 7798123450036 ($2.000 x envase x2 unid.)\n4. [SABOR ESPECIAL] Aceituna y Queso - EAN: 7798123450043 ($2.000 x envase x2 unid.)\n5. [SABOR ESPECIAL] Roquefort con Jamón - EAN: 7798123450050 ($2.000 x envase x2 unid.)\n\nCONDICIONES:\n- Pedido mínimo: 16 envases.\n- Múltiplos de 4 por variedad.\n- Reposición diaria programada.\n- Mantener refrigerado entre 2°C y 5°C.\n\nContacto: ${getSecurePhone()}`;
+                
+                const blob = new Blob([catalogContent], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Catalogo_Mayorista_MigaReal.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
+            return (
+                <div className="min-h-screen bg-slate-900 text-slate-100 font-poppins selection:bg-amber-500 selection:text-slate-950">
+                    <nav className={`fixed w-full z-40 font-poppins transition-all duration-200 ${scrolled || isMobileMenuOpen ? 'bg-slate-950/98 backdrop-blur-md shadow-2xl py-3 border-b border-slate-800' : 'bg-slate-950/80 backdrop-blur-sm py-4 border-b border-slate-800/40'}`}>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex justify-between items-center h-10 sm:h-12">
+                                <div className="flex items-center cursor-pointer z-50" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+                                    <div className="flex items-center gap-2.5">
+                                        <BrandLogo className="w-10 h-10 sm:w-12 sm:h-12" />
+                                        <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+                                            MIGA <span className="text-amber-500">REAL</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="hidden md:flex items-center space-x-7">
+                                    {['Beneficios', 'Productos', 'Rentabilidad', 'FAQ'].map((item) => (
+                                        <a 
+                                            key={item} 
+                                            href={`#${item.toLowerCase()}`}
+                                            onClick={(e) => scrollToSection(e, item.toLowerCase())} 
+                                            className="text-sm font-semibold text-slate-300 hover:text-white transition-colors uppercase tracking-wider"
+                                        >
+                                            {item}
+                                        </a>
+                                    ))}
+                                    <a href={getSecureWaLink()} target="_blank" rel="noopener noreferrer" className="bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg flex items-center gap-2 active:scale-95">
+                                        <WhatsAppIcon className="w-4 h-4" /> Contacto
+                                    </a>
+                                </div>
+                                <div className="md:hidden flex items-center z-50">
+                                    <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Menú" className="text-white p-2.5 active:scale-95 transition-transform bg-slate-900 rounded-xl border border-slate-800">
+                                        {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {isMobileMenuOpen && (
+                            <div className="md:hidden absolute top-full left-0 w-full bg-slate-950 border-t border-slate-800 shadow-2xl pb-6 animate-fadeIn">
+                                <div className="flex flex-col py-4 px-6 space-y-3">
+                                    {['Beneficios', 'Productos', 'Rentabilidad', 'FAQ'].map((item) => (
+                                        <a 
+                                            key={item} 
+                                            href={`#${item.toLowerCase()}`}
+                                            onClick={(e) => scrollToSection(e, item.toLowerCase())} 
+                                            className="text-left py-3 text-slate-200 font-semibold hover:text-amber-400 border-b border-slate-900 transition-colors text-base flex items-center justify-between"
+                                        >
+                                            <span>{item}</span>
+                                            <ArrowRight className="w-4 h-4 text-slate-500" />
+                                        </a>
+                                    ))} 
+                                    <div className="pt-3">
+                                        <a href={getSecureWaLink()} target="_blank" rel="noopener noreferrer" className="text-center w-full py-3.5 text-white font-bold bg-[#25D366] rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2 text-base active:scale-98">
+                                            <WhatsAppIcon className="w-5 h-5" /> Contactar por WhatsApp
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </nav>
+
+                    <header className="hero-bg relative flex flex-col items-center justify-between w-full min-h-[85vh] sm:min-h-[90vh] md:min-h-screen pt-24 sm:pt-28 pb-16 text-white">
+                        <div className="w-full max-w-4xl mx-auto px-4 text-center flex flex-col items-center z-10 my-auto">
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 mb-5 shadow-sm">
+                                <span className="flex h-2 w-2 relative">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                                </span>
+                                <span className="text-amber-300 font-bold text-[11px] sm:text-xs tracking-wider uppercase">Distribución Mayorista Exclusiva</span>
+                            </div>
+                            
+                            <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight font-poppins tracking-tight text-white">
+                                Sándwiches de Miga <span className="text-amber-500">Artesanales</span> para Kioscos
+                            </h1>
+                            
+                            <p className="text-xs sm:text-sm md:text-base text-slate-300 font-normal mb-8 max-w-xl mx-auto leading-relaxed px-2">
+                                Sándwiches frescos con códigos de barras EAN-13, sabores especiales exclusivos y reposiciones programadas para tu mostrador.
+                            </p>
+                            
+                            <div className="flex flex-col xs:flex-row gap-3.5 w-full max-w-xs sm:max-w-md mx-auto">
+                                <button onClick={onNavigateToRegister} className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 px-6 py-4 rounded-2xl text-sm sm:text-base font-extrabold shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-0.5 transition-all active:scale-95 flex items-center justify-center gap-2.5">
+                                    <FileText className="w-5 h-5" /> Realizar Pedido
+                                </button>
+                                <button onClick={handleDownloadCatalog} className="w-full bg-slate-800 text-white border border-slate-700/80 px-6 py-4 rounded-2xl text-sm sm:text-base font-bold hover:bg-slate-750 transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md">
+                                    <Download className="w-4 h-4 text-amber-400" /> Catálogo PDF
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 flex flex-col items-center justify-center text-slate-400 cursor-pointer z-20 w-fit mx-auto p-2" onClick={(e) => scrollToSection(e, 'beneficios')}>
+                            <span className="text-[10px] font-bold tracking-widest uppercase mb-1">Explorar</span>
+                            <ChevronDown className="w-4 h-4 text-amber-400 animate-bounce" />
+                        </div>
+                    </header>
+
+                    <section id="beneficios" className="py-16 sm:py-24 bg-slate-950 font-poppins border-t border-slate-800">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
+                                <span className="text-amber-400 font-bold tracking-wider uppercase text-xs bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20 shadow-sm">Eficiencia Comercial</span>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mt-4 tracking-tight">Diseñado para Kioscos y Almacenes</h2>
+                                <p className="text-slate-400 mt-3 text-sm sm:text-base">Soluciones logísticas reales con opción de suscripción y reposición automática.</p>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                                {DATA.b2bBenefits.map((item, i) => (
+                                    <div key={i} className="bg-slate-900/80 backdrop-blur-md p-8 rounded-3xl border border-slate-800 shadow-xl hover:border-slate-700 transition-all">
+                                        <div className={`w-14 h-14 sm:w-16 sm:h-16 ${item.bg} rounded-2xl flex items-center justify-center mb-6 shadow-inner`}>
+                                            <item.icon className={`${item.color} w-7 h-7 sm:w-8 sm:h-8`} />
+                                        </div>
+                                        <h3 className="text-lg sm:text-xl font-bold mb-3 text-white">{item.title}</h3>
+                                        <p className="text-slate-400 leading-relaxed text-xs sm:text-sm">{item.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="productos" className="py-20 sm:py-28 bg-slate-900 font-poppins border-t border-slate-800/80 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/5 via-transparent to-transparent pointer-events-none"></div>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                            <div className="text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
+                                <span className="text-emerald-400 font-bold tracking-wider uppercase text-xs bg-emerald-500/10 px-4 py-1.5 rounded-full border border-emerald-500/20 shadow-sm">Sabores y Especialidades</span>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mt-4 tracking-tight">Nuestras Variedades de Sándwiches</h2>
+                                <p className="text-slate-400 mt-3.5 text-sm sm:text-base leading-relaxed">Calidad artesanal superior y máxima rotación garantizada para potenciar las ventas de tu mostrador.</p>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-10">
+                                {DATA.products.map((prod, i) => (
+                                    <div key={i} className={`rounded-3xl p-6 sm:p-8 border transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden backdrop-blur-md ${!prod.available ? 'opacity-60 bg-slate-950/40 border-slate-800' : prod.isSpecial ? 'bg-gradient-to-br from-slate-950 via-slate-950 to-amber-950/30 border-amber-500/50 shadow-2xl shadow-amber-500/10' : 'bg-slate-950/80 border-slate-800/80 hover:border-slate-700 shadow-xl'}`}>
+                                        {prod.isSpecial && (
+                                            <div className={`absolute top-0 right-0 left-0 ${prod.available ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 text-slate-950' : 'bg-slate-800 text-slate-400 border-b border-slate-700'} text-[10px] font-extrabold uppercase py-2 text-center shadow-md flex items-center justify-center gap-1.5 tracking-widest`}>
+                                                <Sparkles className="w-3.5 h-3.5" /> {prod.available ? 'Especial' : 'Próximamente'}
+                                            </div>
+                                        )}
+                                        <div className={prod.isSpecial ? 'mt-5' : ''}>
+                                            <div className="flex justify-between items-start mb-5">
+                                                <span className={`px-3.5 py-1.5 ${prod.tagColor} rounded-xl text-xs font-bold uppercase tracking-wider shadow-inner`}>{prod.badge}</span>
+                                                <span className="text-[11px] font-mono text-slate-400 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded-lg">EAN: {prod.code}</span>
+                                            </div>
+                                            
+                                            <ProductImageUploader productName={prod.name} defaultImage={null} />
+
+                                            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2.5 group-hover:text-amber-400 transition-colors">{prod.name}</h3>
+                                            <p className="text-slate-400 leading-relaxed text-xs sm:text-sm mb-6">{prod.desc}</p>
+                                        </div>
+                                        <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                                            <span className="font-medium text-slate-500">Presentación en Envase</span>
+                                            <span className={`${prod.available ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : 'text-slate-400 bg-slate-800 border-slate-700'} font-bold px-3 py-1 rounded-md border`}>{prod.available ? 'Alta Rotación' : 'Próximamente'}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="rentabilidad" className="py-16 sm:py-24 bg-slate-950 text-white font-poppins relative overflow-hidden border-t border-slate-800">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                            <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
+                                <span className="text-amber-400 font-bold tracking-wider uppercase text-xs bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">Calculadora Mayorista</span>
+                                <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mt-4 tracking-tight">Proyectá Tu Ganancia Neta</h2>
+                                <p className="text-slate-400 mt-3 text-sm sm:text-base">Calculá cuánto podés ganar sumando sándwiches Miga Real en tu mostrador.</p>
+                            </div>
+
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-slate-900/80 backdrop-blur-md p-6 sm:p-10 md:p-12 rounded-3xl border border-slate-800 shadow-2xl">
+                                <div className="lg:col-span-6 space-y-6 sm:space-y-8">
+                                    <div>
+                                        <label className="block text-xs sm:text-sm font-bold text-slate-200 mb-3 flex items-center justify-between">
+                                            <span>Sándwiches estimados vendidos por semana:</span>
+                                            <span className="text-amber-400 font-extrabold text-base sm:text-xl">{packCount} unidades</span>
+                                        </label>
+                                        <input 
+                                            type="range" 
+                                            min="16" 
+                                            max="100" 
+                                            step="4" 
+                                            value={packCount} 
+                                            onChange={handleSliderChange} 
+                                            className="w-full accent-amber-500 h-2 bg-slate-950 rounded-lg cursor-pointer"
+                                        />
+                                        <div className="flex justify-between text-[11px] sm:text-xs text-slate-400 mt-2 font-medium">
+                                            <span>16 un. [Mínimo]</span>
+                                            <span>50 un. (Medio)</span>
+                                            <span>100 un. (Alto)</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                                        <div className="bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-800 shadow-inner">
+                                            <p className="text-[11px] sm:text-xs text-slate-400 font-medium mb-1">Costo Mayorista ($2.000 c/u)</p>
+                                            <p className="text-lg sm:text-xl font-bold text-slate-100">${totalInvestment.toLocaleString('es-AR')}</p>
+                                        </div>
+                                        <div className="bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-800 shadow-inner">
+                                            <p className="text-[11px] sm:text-xs text-slate-400 font-medium mb-1">Venta al Público ($3.500 c/u)</p>
+                                            <p className="text-lg sm:text-xl font-bold text-amber-400">${totalRevenue.toLocaleString('es-AR')}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="lg:col-span-6 bg-gradient-to-br from-amber-600 to-orange-700 p-8 sm:p-10 md:p-12 rounded-3xl text-white shadow-xl flex flex-col justify-between text-center border border-amber-500/30">
+                                    <div>
+                                        <span className="inline-block px-4 py-1.5 bg-black/20 text-white rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">Ganancia Semanal Estimada</span>
+                                        <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-3">${totalProfit.toLocaleString('es-AR')}</div>
+                                        <p className="text-amber-100 text-xs sm:text-sm font-medium">Margen neto excelente para productos de alta rotación en mostrador.</p>
+                                    </div>
+                                    <div className="mt-8">
+                                        <button onClick={onNavigateToRegister} className="w-full bg-slate-950 text-white font-extrabold py-4 rounded-2xl shadow-lg hover:bg-slate-900 transition-all active:scale-95 flex items-center justify-center gap-2.5 text-base">
+                                            <FileText className="w-5 h-5" /> Realizar Pedido
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="faq" className="py-16 sm:py-24 bg-slate-900 font-poppins border-t border-slate-800">
+                        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center mb-12 sm:mb-16">
+                                <span className="text-emerald-400 font-bold tracking-wider uppercase text-xs bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20">Resolvé tus dudas</span>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mt-4">Preguntas Frecuentes</h2>
+                            </div>
+                            <div className="space-y-4">
+                                {DATA.faqItems.map((item, i) => (
+                                    <div 
+                                        key={i}
+                                        className={`bg-slate-950 rounded-2xl border transition-all duration-200 cursor-pointer overflow-hidden shadow-md ${openFaq === i ? 'border-amber-500 ring-1 ring-amber-500' : 'border-slate-800 hover:border-slate-700'}`} 
+                                        onClick={() => toggleFaq(i)}
+                                    >
+                                        <div className="flex justify-between items-center p-5 sm:p-6">
+                                            <h3 className={`text-sm sm:text-base md:text-lg font-bold pr-3 ${openFaq === i ? 'text-amber-400' : 'text-white'}`}>{item.question}</h3>
+                                            <div className={`p-1.5 rounded-full shrink-0 ${openFaq === i ? 'text-amber-400 bg-amber-500/10' : 'text-slate-400'}`}>
+                                                {openFaq === i ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                                            </div>
+                                        </div>
+                                        <div className={`transition-all duration-200 overflow-hidden ${openFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                            <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed border-t border-slate-800/60 pt-4">{item.answer}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <footer className="bg-slate-950 text-slate-300 py-12 sm:py-16 border-t border-slate-800 font-poppins text-xs sm:text-sm">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+                                <div className="flex flex-col sm:flex-row items-center gap-4">
+                                    <BrandLogo className="w-12 h-12" />
+                                    <div>
+                                        <span className="text-xl sm:text-2xl font-extrabold text-white">MIGA <span className="text-amber-500">REAL</span></span>
+                                        <p className="text-slate-400 mt-1 text-xs">Sándwiches de miga artesanales mayoristas.</p>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col items-center md:items-end gap-3">
+                                    <p className="text-slate-400 text-xs">¿Consultas o pedidos directos?</p>
+                                    <a href={getSecureWaLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 px-6 py-3.5 rounded-full font-bold transition-colors shadow-lg text-xs sm:text-sm active:scale-95">
+                                        <WhatsAppIcon className="w-4 h-4" /> Hablar por WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="mt-10 border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-slate-500 text-xs gap-4">
+                                <p>&copy; 2026 Miga Real. Todos los derechos reservados.</p>
+                                <div className="flex gap-6">
+                                    <button onClick={onNavigateToTerms} className="hover:text-amber-400 transition-colors">Términos y Condiciones</button>
+                                    <button onClick={onNavigateToPrivacy} className="hover:text-amber-400 transition-colors">Política de Privacidad</button>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [currentView, setCurrentView] = useState('landing');
+
+            return (
+                <div className="min-h-screen bg-slate-900 text-slate-100 font-poppins">
+                    <GlobalStyles />
+                    {currentView === 'landing' && (
+                        <LandingPage 
+                            onNavigateToRegister={() => setCurrentView('register')}
+                            onNavigateToTerms={() => setCurrentView('terms')}
+                            onNavigateToPrivacy={() => setCurrentView('privacy')}
+                        />
+                    )}
+                    {currentView === 'register' && (
+                        <CommerceForm onBack={() => setCurrentView('landing')} />
+                    )}
+                    {currentView === 'terms' && (
+                        <TermsPage onBack={() => setCurrentView('landing')} />
+                    )}
+                    {currentView === 'privacy' && (
+                        <PrivacyPage onBack={() => setCurrentView('landing')} />
+                    )}
+                </div>
+            );
+        };
+
+        createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
