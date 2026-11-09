@@ -1,795 +1,1155 @@
-<!-- ... extracellular -->
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="Miga Real Mayorista - Sándwiches de miga artesanales de alta rotación para kioscos y comercios. Reposición diaria con código EAN-13 y etiquetado térmico.">
+    <meta name="description" content="Miga Real Mayorista - Elaboración y distribución de sándwiches de miga artesanales para kioscos, almacenes y buffets en Zona Oeste. Reposición programada, fechas claras y faja de seguridad.">
     <title>Miga Real - Sándwiches de Miga Mayoristas</title>
-    
-    <!-- Preload critical fonts & assets -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" as="style">
-    
+    <meta name="theme-color" content="#111827">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:site_name" content="Miga Real Mayorista">
+    <meta property="og:title" content="Miga Real - Sándwiches de Miga Mayoristas para Kioscos y Comercios">
+    <meta property="og:description" content="Sándwiches de miga artesanales en envase hermético x2 unidades. Pack de prueba inicial de 8 envases, reposición programada y programa de referidos de $10.000.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=1200&q=80">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111827'/%3E%3Ctext x='32' y='29' font-size='17' font-weight='800' text-anchor='middle' fill='%23ef4444' font-family='Arial,sans-serif'%3EMIGA%3C/text%3E%3Ctext x='32' y='47' font-size='14' font-weight='700' text-anchor='middle' fill='%23e5e7eb' font-family='Arial,sans-serif'%3EREAL%3C/text%3E%3C/svg%3E">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Miga Real Mayorista",
+        "description": "Elaboración y distribución mayorista de sándwiches de miga artesanales para kioscos, almacenes y comercios.",
+        "telephone": "+5491138235784",
+        "priceRange": "$$",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Paso del Rey",
+            "addressRegion": "Provincia de Buenos Aires",
+            "addressCountry": "AR"
+        },
+        "areaServed": ["Paso del Rey", "Moreno", "Merlo", "Ituzaingó", "General Rodríguez", "Zona Oeste GBA"],
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "08:00",
+                "closes": "18:00"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Preload critical fonts (3 weights only: 500, 700, 800 for optimal performance) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- Preconnect for fast script loading -->
-    <link rel="preconnect" href="https://esm.sh" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Vercel Speed Insights -->
-    <script>
-        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/speed-insights/script.js"></script>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        migaPrimary: '#0F172A',
-                        migaGold: '#D97706',
-                        migaGoldHover: '#B45309',
-                        migaGreen: '#16A34A',
+                        cokeRed: '#E31837',
+                        cokeRedDark: '#B30B23',
+                        cokeDark: '#111827',
+                        cokeLight: '#F3F4F6',
+                        cokeCard: '#FFFFFF',
                     },
                     fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(8px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    },
+                    animation: {
+                        fadeIn: 'fadeIn 0.2s ease-out forwards'
                     }
                 }
             }
         }
     </script>
+
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            .animate-fadeIn { animation: none !important; }
+            html { scroll-behavior: auto !important; }
+        }
+        /* Estilos exclusivos para impresión / exportación real del Catálogo en PDF */
+        @media print {
+            body * { visibility: hidden; }
+            #printable-catalog, #printable-catalog * { visibility: visible; }
+            #printable-catalog {
+                display: block !important;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: #ffffff;
+                color: #111827;
+                padding: 16px;
+            }
+            .no-print { display: none !important; }
+        }
+    </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950 overflow-x-hidden">
-    <div id="root"></div>
+<body class="bg-[#ECEFF1] text-[#111827] font-sans antialiased selection:bg-red-600 selection:text-white overflow-x-hidden">
+    <noscript>
+        <div style="padding:2rem;font-family:sans-serif;background:#111827;color:#ffffff;text-align:center;">
+            Para usar la comanda interactiva activá JavaScript o escribinos directamente por WhatsApp al <strong>+54 9 11 3823-5784</strong>.
+        </div>
+    </noscript>
 
-    <script type="text/babel" data-type="module">
-        import React, { useState, useEffect, useRef, memo } from 'https://esm.sh/react@18.2.0';
-        import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
-        import { 
-            Send, Store, Phone, MapPin, Clock, ShoppingBag, ArrowLeft, 
-            Menu, X, ArrowRight, RefreshCw, Package, ShieldCheck, 
-            Calculator, BarChart3, Coins, ChevronDown, ChevronUp, FileText, Shield, Utensils, Image as ImageIcon, Download, Share2, Award, Sparkles
-        } from 'https://esm.sh/lucide-react@0.292.0';
+    <!-- Contenedor principal renderizado sin Babel en el cliente (~3MB ahorrados, carga instantánea) -->
+    <div id="app" class="min-h-screen bg-[#ECEFF1] text-[#111827]"></div>
 
+    <!-- Vista de Impresión / Catálogo PDF Real -->
+    <div id="printable-catalog" class="hidden"></div>
+
+    <script>
         // ==========================================
-        // DATOS CENTRALIZADOS Y SEGURIDAD
+        // CONFIGURACIÓN COMERCIAL, LEGAL Y WEBHOOK
         // ==========================================
-        const _p = ["549", "11", "3823", "5784"];
-        const getSecurePhone = () => _p.join('');
-        const getSecureWaLink = (text = "¡Hola Miga Real! Quisiera consultar stock y condiciones mayoristas para mi comercio.") => {
-            return `https://wa.me/${getSecurePhone()}?text=${encodeURIComponent(text)}`;
+        const WA_PHONE = "5491138235784";
+        const PRICE_VALID_UNTIL = "09/11/2026";
+        const WHOLESALE_PRICE = 2000;
+        const SUGGESTED_RETAIL_PRICE = 3500;
+
+        // Opcional: Pegá aquí la URL de tu Google Apps Script o Formspree para guardar cada pedido y referido en tu propia planilla con fecha y hora del servidor.
+        const AUDIT_WEBHOOK_URL = "";
+
+        // Datos operativos e higiénicos reales visibles en el pie de página y documentos
+        const COMPANY = {
+            razonSocial: "Miga Real - Elaboración Artesanal Mayorista",
+            domicilio: "Elaboración y distribución en Paso del Rey (CP 1742), Partido de Moreno, Zona Oeste GBA",
+            manipulacion: "Personal con Carnet Oficial de Manipulador de Alimentos vigente (Código Alimentario Argentino)",
+            rotulado: "Etiquetado con fecha de elaboración, vencimiento, ingredientes, alérgenos y cadena de frío (2 °C a 5 °C)"
         };
 
-        const DATA = {
-            b2bBenefits: [
-                { icon: RefreshCw, title: "Reposición Diaria", desc: "Coordinamos los pedidos con 24 horas de anticipación para garantizar reposición diaria y heladeras con stock fresco en todo momento.", color: "text-amber-500", bg: "bg-amber-500/10" },
-                { icon: Package, title: "Etiquetado EAN-13 y Seguridad", desc: "Código de barras, fechas de elaboración/vencimiento y un sello de seguridad para el comprador que se rompe al abrir, garantizando que nadie lo manipuló.", color: "text-orange-500", bg: "bg-orange-500/10" },
-                { icon: Utensils, title: "Variedad Exclusiva", desc: "Contamos con una carta de variedades inigualable en el mercado que potencia las ventas de tu mostrador con opciones gourmet y tradicionales.", color: "text-green-500", bg: "bg-green-500/10" }
-            ],
-            products: [
-                { name: "Jamón y Queso Clásico", desc: "El sándwich de mayor rotación en kioscos. Pan de miga extra tierno y fiambres seleccionados.", badge: "Más Vendido", code: "7798123450012", tagColor: "bg-amber-500/10 text-amber-400", isSpecial: false, available: true },
-                { name: "Tomate, Lechuga y Queso", desc: "Opción vegetariana fresca y equilibrada para el almuerzo rápido de tus clientes.", badge: "Frescura Diaria", code: "7798123450029", tagColor: "bg-emerald-500/10 text-emerald-400", isSpecial: false, available: true },
-                { name: "Salame y Queso", desc: "Variedad con excelente margen para captar al cliente exigente que busca sabores intensos.", badge: "Exclusivo", code: "7798123450036", tagColor: "bg-purple-500/10 text-purple-400", isSpecial: false, available: true },
-                { name: "Aceituna y Queso", desc: "Delicada combinación de aceitunas verdes seleccionadas y cremoso queso cortado en finas láminas.", badge: "Especial", code: "7798123450043", tagColor: "bg-green-500/20 text-green-300 border border-green-500/30", isSpecial: true, available: true },
-                { name: "Roquefort con Jamón", desc: "Sabor gourmet intenso para los clientes que buscan una experiencia culinaria superior en el mostrador.", badge: "Próximamente", code: "7798123450050", tagColor: "bg-slate-700/50 text-slate-400 border border-slate-600/30", isSpecial: true, available: false }
-            ],
-            faqItems: [
-                { 
-                    question: "¿Cuál es la compra mínima para comercios?", 
-                    answer: "El pedido mínimo mayorista es de 16 envases. Recordá que cada envase contiene 2 exquisitos sándwiches listos para la venta, asegurando una excelente rotación y un stock inicial óptimo para tu mostrador." 
-                },
-                { 
-                    question: "¿Cómo se presentan los envases y cuántas unidades traen?", 
-                    answer: "Cada envase hermético incluye 2 generosos sándwiches de miga artesanales. Vienen con etiqueta térmica reglamentaria, código de barras EAN-13, fecha de elaboración, vencimiento y precinto de seguridad inviolable." 
-                },
-                { 
-                    question: "¿Cómo funciona la reposición diaria?", 
-                    answer: "Trabajamos con pedidos tomados con 24 horas de anticipación. Esto nos permite coordinar entregas diarias y garantizar que tus heladeras exhibidoras dispongan siempre de producto 100% fresco sin acumular stock innecesario." 
-                },
-                { 
-                    question: "¿Qué cuidados de refrigeración y cadena de frío se requieren?", 
-                    answer: "Al tratarse de sándwiches de miga artesanales y frescos elaborados sin conservantes químicos artificiales, es un requisito indispensable mantenerlos en heladera exhibidora entre 2°C y 5°C. Esto preserva la textura inigualable del pan de miga y garantiza la máxima seguridad alimentaria para tus clientes." 
-                },
-                { 
-                    question: "¿Cómo se coordinan los pagos y la entrega en el local?", 
-                    answer: "Una vez completado el formulario de pedido o vía WhatsApp, coordinamos directamente los días de reparto según la zona de tu comercio y los medios de pago habituales (efectivo, transferencia o cuenta corriente acordada)." 
-                }
-            ]
-        };
-
-        const BrandLogo = ({ className = "w-12 h-12" }) => {
-            const [customLogo, setCustomLogo] = useState(null);
-            const fileInputRef = useRef(null);
-
-            const handleImageUpload = (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        setCustomLogo(reader.result);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-
-            return (
-                <div 
-                    onClick={() => fileInputRef.current && fileInputRef.current.click()}
-                    title="Haz clic para subir tu logo (se guardará en la carpeta img/ de tu repositorio)"
-                    className={`relative flex items-center justify-center rounded-2xl overflow-hidden bg-slate-900 border border-amber-500/40 shadow-md cursor-pointer group ${className}`}
-                >
-                    <input 
-                        type="file" 
-                        ref={fileInputRef} 
-                        onChange={handleImageUpload} 
-                        accept="image/*" 
-                        className="hidden" 
-                    />
-                    {customLogo ? (
-                        <img 
-                            src={customLogo} 
-                            alt="Tu Logo" 
-                            className="w-full h-full object-contain p-0.5 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" 
-                            style={{ imageRendering: '-webkit-optimize-contrast' }}
-                        />
-                    ) : (
-                        <div className="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center text-amber-400 text-[10px] font-bold text-center p-1 group-hover:bg-slate-800 transition-colors">
-                            <span>img/logo.png</span>
-                        </div>
-                    )}
-                </div>
-            );
-        };
-
-        const ProductImageUploader = ({ productName, defaultImage }) => {
-            const [imageSrc, setImageSrc] = useState(defaultImage);
-            const fileInputRef = useRef(null);
-
-            const handleUpload = (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        setImageSrc(reader.result);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-
-            return (
-                <div 
-                    onClick={() => fileInputRef.current && fileInputRef.current.click()}
-                    className="w-full h-40 sm:h-48 bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl mb-6 flex flex-col items-center justify-center border border-slate-800/60 relative overflow-hidden group cursor-pointer shadow-inner"
-                    title="Clic para subir la imagen de este producto (Guardar en carpeta img/ de GitHub)"
-                >
-                    <input 
-                        type="file" 
-                        ref={fileInputRef} 
-                        onChange={handleUpload} 
-                        accept="image/*" 
-                        className="hidden" 
-                    />
-                    
-                    {imageSrc ? (
-                        <img src={imageSrc} alt={productName} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                    ) : (
-                        <>
-                            <div className="absolute inset-0 bg-amber-500/0 group-hover:bg-amber-500/5 transition-colors duration-300"></div>
-                            <ImageIcon className="w-10 h-10 text-slate-600 mb-2 group-hover:scale-110 group-hover:text-amber-500/80 transition-all duration-300" />
-                            <span className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">img/{productName.toLowerCase().replace(/ /g, '_')}.jpg</span>
-                        </>
-                    )}
-                    <div className="absolute bottom-2 right-2 bg-slate-950/85 backdrop-blur-sm text-amber-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-amber-500/30 opacity-0 group-hover:opacity-100 transition-opacity">
-                        Subir / Cambiar
-                    </div>
-                </div>
-            );
-        };
-
-        const WhatsAppIcon = ({ className }) => (
-            <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-            </svg>
-        );
-
-        const GlobalStyles = () => (
-            <style>{`
-            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-            .font-poppins { font-family: 'Poppins', sans-serif; }
-            .hero-bg {
-                background-color: #0F172A; 
-                background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-                background-size: 32px 32px;
-                position: relative;
+        const PRODUCTS = [
+            {
+                id: "jyq",
+                name: "Jamón y Queso Clásico",
+                desc: "Nuestro sándwich de mayor rotación en mostrador. Pan de miga extra tierno, jamón cocido seleccionado y queso danbo en fetas.",
+                image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=640&q=80",
+                badge: "Más Vendido",
+                tagColor: "bg-red-100 text-red-800 border border-red-200",
+                isSpecial: false,
+                available: true,
+                price: 2000,
+                pesoNeto: "220 g aprox. por envase (2 sándwiches triples)",
+                vidaUtil: "4 días desde su elaboración (Conservar en heladera entre 2 °C y 5 °C)",
+                ingredientes: "Pan de miga (harina de trigo 0000, agua, levadura, sal), jamón cocido, queso danbo y mayonesa pasteurizada.",
+                alergenos: "CONTIENE DERIVADOS DE TRIGO, LECHE, HUEVO Y SOJA."
+            },
+            {
+                id: "tlq",
+                name: "Tomate, Lechuga y Queso",
+                desc: "Opción vegetariana fresca y liviana, ideal para el almuerzo rápido de oficinas, comercios y estudiantes.",
+                image: "https://images.unsplash.com/photo-1540713434306-58505cf1b6fc?auto=format&fit=crop&w=640&q=80",
+                badge: "Frescura Diaria",
+                tagColor: "bg-emerald-100 text-emerald-800 border border-emerald-200",
+                isSpecial: false,
+                available: true,
+                price: 2000,
+                pesoNeto: "230 g aprox. por envase (2 sándwiches triples)",
+                vidaUtil: "3 días desde su elaboración (Conservar en heladera entre 2 °C y 5 °C)",
+                ingredientes: "Pan de miga (harina de trigo 0000, agua, levadura, sal), queso danbo, tomate fresco sanitizado, lechuga y mayonesa pasteurizada.",
+                alergenos: "CONTIENE DERIVADOS DE TRIGO, LECHE, HUEVO Y SOJA."
+            },
+            {
+                id: "syq",
+                name: "Salame y Queso",
+                desc: "Combinación clásica de salame tipo milán picado fino y queso suave en pan de miga húmedo.",
+                image: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=640&q=80",
+                badge: "Clásico Argentino",
+                tagColor: "bg-slate-200 text-slate-800 border border-slate-300",
+                isSpecial: false,
+                available: true,
+                price: 2000,
+                pesoNeto: "220 g aprox. por envase (2 sándwiches triples)",
+                vidaUtil: "4 días desde su elaboración (Conservar en heladera entre 2 °C y 5 °C)",
+                ingredientes: "Pan de miga (harina de trigo 0000, agua, levadura, sal), salame tipo milán, queso danbo y mayonesa pasteurizada.",
+                alergenos: "CONTIENE DERIVADOS DE TRIGO, LECHE, HUEVO Y SOJA."
+            },
+            {
+                id: "ayq",
+                name: "Aceituna y Queso",
+                desc: "Delicada combinación de aceitunas verdes descarozadas feteadas y queso danbo en láminas.",
+                image: "https://images.unsplash.com/photo-1481070414801-51fd732d7184?auto=format&fit=crop&w=640&q=80",
+                badge: "Especial",
+                tagColor: "bg-red-600 text-white",
+                isSpecial: true,
+                available: true,
+                price: 2000,
+                pesoNeto: "225 g aprox. por envase (2 sándwiches triples)",
+                vidaUtil: "4 días desde su elaboración (Conservar en heladera entre 2 °C y 5 °C)",
+                ingredientes: "Pan de miga (harina de trigo 0000, agua, levadura, sal), queso danbo, aceitunas verdes descarozadas y mayonesa pasteurizada.",
+                alergenos: "CONTIENE DERIVADOS DE TRIGO, LECHE, HUEVO Y SOJA."
+            },
+            {
+                id: "rqj",
+                name: "Roquefort con Jamón",
+                desc: "Receta especial con pasta de queso azul seleccionado y jamón cocido de primera línea.",
+                image: "https://images.unsplash.com/photo-1553909489-cd47e0907980?auto=format&fit=crop&w=640&q=80",
+                badge: "Próximamente",
+                tagColor: "bg-slate-200 text-slate-700 border border-slate-300",
+                isSpecial: true,
+                available: false,
+                price: 2000,
+                pesoNeto: "220 g aprox. por envase (2 sándwiches triples)",
+                vidaUtil: "4 días desde su elaboración (Conservar en heladera entre 2 °C y 5 °C)",
+                ingredientes: "Pan de miga (harina de trigo 0000, agua, levadura, sal), jamón cocido, queso azul (roquefort), manteca y mayonesa pasteurizada.",
+                alergenos: "CONTIENE DERIVADOS DE TRIGO, LECHE, HUEVO Y SOJA."
             }
-            .hero-bg::before {
-                content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-                background: radial-gradient(circle at 50% 35%, rgba(217, 119, 6, 0.18) 0%, transparent 70%);
-                pointer-events: none;
+        ];
+
+        const TESTIMONIALS = [
+            {
+                kiosco: "Kiosco & Café El Andén",
+                zona: "Paso del Rey Centro",
+                comentario: "Arrancamos con el pack de prueba de 8 envases para ver cómo respondía la gente al mediodía y a la semana siguiente ya pasamos a 24 envases fijos todos los martes y viernes."
+            },
+            {
+                kiosco: "Maxikiosco 24 hs Avenida",
+                zona: "Moreno Sur",
+                comentario: "Lo que más nos sirve es que vienen en bandeja cerrada de a 2 con faja de seguridad y fecha clara. El empleado los pasa rápido y no tenemos desperdicio de fiambre ni pan."
+            },
+            {
+                kiosco: "Despensa y Fiambrería San Jorge",
+                zona: "Merlo Norte",
+                comentario: "Recomendé a dos comercios conocidos con el pre-registro por WhatsApp y apenas cumplieron su segundo pedido me descontaron los $20.000 de mi boleta semanal. Muy cumplidores."
             }
-            @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
-            .animate-float { animation: float 4s ease-in-out infinite; }
-            button, a, input { touch-action: manipulation; }
-            `}</style>
-        );
+        ];
+
+        const FAQ_ITEMS = [
+            {
+                question: "¿Cuál es la compra mínima y cómo funciona el Pack de Prueba?",
+                answer: "El pedido mayorista regular es de 16 envases (32 sándwiches, en múltiplos de 4 por molde). Sin embargo, si es la primera vez que comprás para probar la rotación en tu comercio, podés elegir en la comanda el 'Pack Primer Pedido de Prueba' de 8 envases ($16.000)."
+            },
+            {
+                question: "¿Cómo funciona el pago de $10.000 por referir un comercio?",
+                answer: "1) Pre-registrás los datos del kiosco o almacén que vas a recomendar antes de su primer pedido usando el botón 'Pre-registrar un Comercio'. 2) Nuestro reparto verifica que sea un comercio físico real y nuevo. 3) Una vez que ese comercio recibe y abona su 2° pedido mayorista regular (tanto el 1° como el 2° pedido de mínimo 16 envases cada uno), te transferimos $10.000 a tu CBU/Alias o te los descontamos de tu próxima boleta."
+            },
+            {
+                question: "¿Cómo se presentan los envases y qué datos incluye la etiqueta?",
+                answer: "Cada envase hermético contiene 2 sándwiches de miga triples (220 g aprox.) cerrados con faja de seguridad. En la etiqueta figuran de forma clara la fecha de elaboración, fecha de vencimiento, los ingredientes principales, aviso de alérgenos y la indicación de conservar en heladera entre 2 °C y 5 °C."
+            },
+            {
+                question: "¿Qué cuidados de refrigeración y cadena de frío se requieren?",
+                answer: "Al ser un producto fresco elaborado sin conservantes artificiales y por personal con Carnet de Manipulador de Alimentos, debe conservarse obligatoriamente en heladera exhibidora entre 2 °C y 5 °C desde el momento de su recepción."
+            }
+        ];
 
         // ==========================================
-        // SUB-PÁGINAS
+        // UTILIDADES DE SEGURIDAD, ANALYTICS Y ESTADO
         // ==========================================
-        const TermsPage = memo(({ onBack }) => {
-            useEffect(() => { window.scrollTo(0, 0); }, []);
-            return (
-                <div className="min-h-screen bg-slate-900 font-sans text-slate-100 p-6 md:p-12">
-                    <div className="max-w-4xl mx-auto bg-slate-800 p-8 md:p-12 rounded-3xl border border-slate-700 shadow-2xl">
-                        <button onClick={onBack} aria-label="Volver atrás" className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-700 px-4 py-2 rounded-full transition-colors">
-                            <ArrowLeft className="w-4 h-4" /> Volver al sitio principal
-                        </button>
-                        <h1 className="text-3xl md:text-4xl font-extrabold mb-6 text-white tracking-tight">Términos y Condiciones Comerciales Mayoristas</h1>
-                        <p className="text-xs text-amber-400 font-mono mb-8 bg-amber-500/10 p-3 rounded-xl border border-amber-500/20">Última actualización: Noviembre de 2026. Conforme a la legislación vigente de la República Argentina.</p>
-                        
-                        <div className="space-y-6 text-slate-300 text-sm md:text-base leading-relaxed">
-                            <section>
-                                <h2 className="text-xl font-bold text-white mb-2">1. Objeto y Ámbito de Aplicación</h2>
-                                <p>Las presentes condiciones regulan de manera exclusiva las relaciones comerciales de carácter mayorista entre <strong>Miga Real</strong> ("el Proveedor") y los comercios minoristas, almacenes, kioscos, autoservicios y estaciones de servicio ("el Cliente Comprador").</p>
-                            </section>
-                            <section>
-                                <h2 className="text-xl font-bold text-white mb-2">2. Requisitos de Compra Mínima y Múltiplos</h2>
-                                <p>El volumen mínimo de adquisición por pedido se fija en <strong>16 envases herméticos</strong> (32 unidades individuales). Los incrementos deberán realizarse estrictamente en múltiplos de 4 envases por los cortes de molde.</p>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            );
-        });
+        const escapeHtml = (str) => String(str || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
 
-        const PrivacyPage = memo(({ onBack }) => {
-            useEffect(() => { window.scrollTo(0, 0); }, []);
-            return (
-                <div className="min-h-screen bg-slate-900 font-sans text-slate-100 p-6 md:p-12">
-                    <div className="max-w-4xl mx-auto bg-slate-800 p-8 md:p-12 rounded-3xl border border-slate-700 shadow-2xl">
-                        <button onClick={onBack} aria-label="Volver atrás" className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-700 px-4 py-2 rounded-full transition-colors">
-                            <ArrowLeft className="w-4 h-4" /> Volver al sitio principal
-                        </button>
-                        <h1 className="text-3xl md:text-4xl font-extrabold mb-6 text-white tracking-tight">Política de Privacidad y Protección de Datos</h1>
-                        <p className="text-xs text-emerald-400 font-mono mb-8 bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20">Ley N° 25.326 de Protección de Datos Personales.</p>
-                        
-                        <div className="space-y-6 text-slate-300 text-sm md:text-base leading-relaxed">
-                            <section>
-                                <h2 className="text-xl font-bold text-white mb-2">1. Recopilación de Información Comercial</h2>
-                                <p>Recopilamos datos estrictamente necesarios para la gestión de pedidos y logística de entrega en su comercio.</p>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            );
-        });
+        const normalizePhone = (phone) => String(phone || '').replace(/\D/g, '').slice(-8);
 
-        const CommerceForm = memo(({ onBack }) => {
-            const [formData, setFormData] = useState({ 
-                nombreComercio: '', 
-                whatsapp: '', 
-                direccion: '', 
-                horario: '', 
-                recurrente: 'no', 
-                frecuencia: 'Semanal (Martes y Jueves)',
-                refCode: '',
-                _honeypot: '' 
-            });
-            const [order, setOrder] = useState({});
-            const [showError, setShowError] = useState(false);
+        const generateSecureToken = (prefix = 'MR') => {
+            const arr = new Uint8Array(4);
+            if (window.crypto && window.crypto.getRandomValues) {
+                window.crypto.getRandomValues(arr);
+            } else {
+                for (let i = 0; i < 4; i++) arr[i] = Math.floor(Math.random() * 256);
+            }
+            const hex = Array.from(arr, b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+            const datePart = new Date().toISOString().slice(2, 10).replace(/-/g, '');
+            return `${prefix}-${datePart}-${hex}`;
+        };
 
-            const ORDER_PRODUCTS = [
-                { name: "Jamón y Queso Clásico", price: 2000, color: "text-amber-400", bg: "bg-amber-500/10", isSpecial: false, available: true },
-                { name: "Tomate, Lechuga y Queso", price: 2000, color: "text-emerald-400", bg: "bg-emerald-500/10", isSpecial: false, available: true },
-                { name: "Salame y Queso", price: 2000, color: "text-purple-400", bg: "bg-purple-500/10", isSpecial: false, available: true },
-                { name: "Aceituna y Queso", price: 2000, color: "text-green-400", bg: "bg-green-500/20 border border-green-500/30", isSpecial: true, available: true },
-                { name: "Roquefort con Jamón", price: 2000, color: "text-slate-400", bg: "bg-slate-800/50 border border-slate-700/30", isSpecial: true, available: false }
-            ];
+        const trackEvent = (eventName, payload = {}) => {
+            try {
+                if (window.gtag) window.gtag('event', eventName, payload);
+                if (window.dataLayer && Array.isArray(window.dataLayer)) {
+                    window.dataLayer.push({ event: eventName, ...payload });
+                }
+            } catch (e) { /* ignore analytics errors */ }
+        };
 
-            const handleChange = (e) => setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-            
-            const updateQty = (product, val) => {
-                setOrder(prev => {
-                    const newOrder = { ...prev, [product]: Math.max(0, val) };
-                    if (newOrder[product] === 0) delete newOrder[product];
-                    return newOrder;
+        const sendToAuditWebhook = async (type, data) => {
+            if (!AUDIT_WEBHOOK_URL) return;
+            try {
+                await fetch(AUDIT_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type,
+                        timestamp: new Date().toISOString(),
+                        userAgent: navigator.userAgent,
+                        ...data
+                    }),
+                    keepalive: true
                 });
-                setShowError(false);
-            };
+            } catch (e) { /* fallback continúa por WhatsApp */ }
+        };
 
-            const totalPacks = Object.values(order).reduce((acc, val) => acc + val, 0);
-            const totalAmount = totalPacks * 2000;
+        const getWaLink = (text = "¡Hola Miga Real! Quisiera consultar disponibilidad y condiciones mayoristas para mi comercio.") => {
+            return `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(text)}`;
+        };
 
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                if (formData._honeypot) return;
+        const openWhatsApp = (url, eventType = 'whatsapp_click') => {
+            trackEvent(eventType, { url });
+            const a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
 
-                if (totalPacks < 16) {
-                    setShowError(true);
-                    return;
-                }
-                
-                let orderText = "";
-                for (const [prod, qty] of Object.entries(order)) {
-                    orderText += `- ${qty}x envases de ${prod}\n`;
-                }
+        const loadSaved = (key, fallback) => {
+            try {
+                const raw = sessionStorage.getItem(key);
+                if (!raw) return fallback;
+                const parsed = JSON.parse(raw);
+                return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? { ...fallback, ...parsed } : fallback;
+            } catch (e) {
+                return fallback;
+            }
+        };
 
-                let subText = formData.recurrente === 'si' ? `\n🔄 *Suscripción Recurrente:* Sí (${formData.frecuencia})` : '\n🔄 *Suscripción Recurrente:* No (Pedido Único)';
-                let refText = formData.refCode ? `\n🤝 *Kiosco Referidor:* ${formData.refCode}` : '';
+        const saveStateToSession = () => {
+            try {
+                sessionStorage.setItem('mr_form', JSON.stringify(state.formData));
+                sessionStorage.setItem('mr_order', JSON.stringify(state.order));
+            } catch (e) {}
+        };
 
-                const message = `¡Hola Miga Real! 👋\n\nQuiero realizar el siguiente pedido mayorista:\n\n🛒 *DETALLE DE LA COMANDA*\n${orderText}\n*Total Envases:* ${totalPacks} un.\n*Monto Total:* $${totalAmount.toLocaleString('es-AR')}${subText}${refText}\n\n🏪 *DATOS DE ENTREGA*\n*Comercio:* ${formData.nombreComercio}\n*WhatsApp:* ${formData.whatsapp}\n*Dirección:* ${formData.direccion}\n*Horario:* ${formData.horario}\n\nAguardamos confirmación. ¡Gracias!`;
-                
-                window.open(getSecureWaLink(message), '_blank', 'noopener,noreferrer');
-            };
-            
-            useEffect(() => { window.scrollTo(0, 0); }, []);
+        // ==========================================
+        // ESTADO GLOBAL REACTIVO LIGERO
+        // ==========================================
+        const ROUTES = { '': 'landing', '#': 'landing', '#/pedido': 'register', '#/terminos': 'terms', '#/privacidad': 'privacy' };
+        const VIEW_TITLES = {
+            landing: 'Miga Real - Sándwiches de Miga Mayoristas',
+            register: 'Armar Pedido Mayorista - Miga Real',
+            terms: 'Términos y Condiciones Comerciales - Miga Real',
+            privacy: 'Política de Privacidad (Ley 25.326) - Miga Real'
+        };
 
-            return (
-                <div className="min-h-screen bg-slate-950 font-sans text-slate-100 flex flex-col">
-                    <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-4 py-3 sm:px-6 lg:px-8 flex items-center justify-between shadow-lg">
-                        <button onClick={onBack} aria-label="Volver atrás" className="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-all bg-slate-900 hover:bg-slate-800 px-4 py-2 rounded-full border border-slate-700/80 active:scale-95">
-                            <ArrowLeft className="w-4 h-4" /> <span className="hidden sm:inline">Volver</span>
+        const state = {
+            currentView: ROUTES[window.location.hash] || 'landing',
+            mobileMenuOpen: false,
+            referralModalOpen: false,
+            referralError: '',
+            openSpecId: null,
+            openFaqIndex: null,
+            packCount: 32,
+            orderError: '',
+            daysError: false,
+            formData: loadSaved('mr_form', {
+                tipoPedido: 'regular', // 'regular' (mín 16) o 'prueba' (mín 8)
+                nombreComercio: '',
+                whatsapp: '',
+                direccion: '',
+                localidad: 'Paso del Rey',
+                horario: '',
+                medioPago: 'Efectivo contra entrega',
+                recurrente: 'no',
+                diasRecurrentes: [],
+                franjaHoraria: 'Mañana (8 a 13 hs)',
+                refNombre: '',
+                refTelefono: ''
+            }),
+            order: loadSaved('mr_order', {})
+        };
+
+        // ==========================================
+        // ICONOS SVG INLINE (0 peticiones externas)
+        // ==========================================
+        const ICONS = {
+            whatsapp: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>`,
+            check: `<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`,
+            shield: `<svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+            refresh: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>`,
+            package: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>`,
+            utensils: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2M7 2v20m14-7V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>`,
+            arrowLeft: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>`,
+            fileText: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+            download: `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>`,
+            send: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>`
+        };
+
+        const renderBrandLogo = (sizeClass = "w-10 h-10") => `
+            <div role="img" aria-label="Logo Miga Real" class="flex items-center justify-center rounded-2xl overflow-hidden bg-slate-900 border border-slate-700 shadow-sm ${sizeClass}">
+                <div class="flex flex-col items-center justify-center text-red-500 text-[10px] font-extrabold text-center p-1 leading-tight">
+                    <span>MIGA</span>
+                    <span class="text-[8px] text-slate-200">REAL</span>
+                </div>
+            </div>
+        `;
+
+        // ==========================================
+        // GENERADOR DE CATÁLOGO IMPRIMIBLE / PDF REAL
+        // ==========================================
+        const buildPrintableCatalog = () => {
+            const container = document.getElementById('printable-catalog');
+            if (!container) return;
+            const rows = PRODUCTS.map(p => `
+                <tr style="border-bottom:1px solid #cbd5e1;">
+                    <td style="padding:10px;font-weight:700;">${escapeHtml(p.name)} ${!p.available ? '(Próximamente)' : ''}</td>
+                    <td style="padding:10px;">${escapeHtml(p.pesoNeto)}</td>
+                    <td style="padding:10px;">${escapeHtml(p.vidaUtil)}</td>
+                    <td style="padding:10px;font-weight:800;">$${p.price.toLocaleString('es-AR')}</td>
+                </tr>
+                <tr style="border-bottom:2px solid #94a3b8;background:#f8fafc;">
+                    <td colspan="4" style="padding:8px 10px;font-size:11px;color:#334155;">
+                        <strong>Etiqueta de Ingredientes:</strong> ${escapeHtml(p.ingredientes)} | <strong>Alérgenos:</strong> ${escapeHtml(p.alergenos)}
+                    </td>
+                </tr>
+            `).join('');
+
+            container.innerHTML = `
+                <div style="font-family:Arial,sans-serif;max-width:800px;margin:0 auto;color:#111827;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #E31837;padding-bottom:12px;margin-bottom:16px;">
+                        <div>
+                            <h1 style="margin:0;font-size:24px;font-weight:800;">MIGA REAL - CATÁLOGO MAYORISTA B2B</h1>
+                            <p style="margin:4px 0 0;font-size:12px;color:#334155;">Elaboración artesanal y distribución directa para kioscos, almacenes y comercios.</p>
+                        </div>
+                        <div style="text-align:right;font-size:12px;">
+                            <strong>Precios vigentes al:</strong> ${PRICE_VALID_UNTIL}<br>
+                            <strong>WhatsApp Pedidos:</strong> +54 9 11 3823-5784
+                        </div>
+                    </div>
+
+                    <div style="background:#f1f5f9;padding:12px;border-radius:8px;margin-bottom:16px;font-size:12px;line-height:1.5;">
+                        <strong>Condiciones Mayoristas:</strong> Pedido regular mínimo de <strong>16 envases</strong> (múltiplos de 4). Nuevo <strong>Pack Primer Pedido de Prueba de 8 envases</strong> disponible para comercios nuevos. Conservación obligatoria en heladera entre 2 °C y 5 °C. Horario de corte de pedidos: 18:00 hs para reparto al día siguiente hábil (Lunes a Sábados).
+                    </div>
+
+                    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;">
+                        <thead>
+                            <tr style="background:#111827;color:#ffffff;text-align:left;">
+                                <th style="padding:10px;">Variedad</th>
+                                <th style="padding:10px;">Presentación / Peso Aprox.</th>
+                                <th style="padding:10px;">Vida Útil y Conservación</th>
+                                <th style="padding:10px;">Costo Mayorista</th>
+                            </tr>
+                        </thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+
+                    <div style="border:1px solid #cbd5e1;padding:12px;border-radius:8px;font-size:12px;margin-bottom:16px;">
+                        <strong>Programa de Expansión Comercial ($10.000 por Referido):</strong> Pre-registrá a un comercio colega antes de su primer pedido. Al completarse y abonarse su 2° compra mayorista regular (1° y 2° pedido de mínimo 16 envases c/u), recibís $10.000 por transferencia o descuento en boleta.
+                    </div>
+
+                    <p style="font-size:11px;color:#475569;margin-top:12px;">
+                        ${escapeHtml(COMPANY.razonSocial)} • ${escapeHtml(COMPANY.domicilio)} • ${escapeHtml(COMPANY.manipulacion)}
+                    </p>
+                </div>
+            `;
+        };
+
+        window.handlePrintCatalog = () => {
+            trackEvent('download_catalog_pdf');
+            buildPrintableCatalog();
+            window.print();
+        };
+
+        // ==========================================
+        // MODAL DE REFERIDOS CON LABELS Y ANTI-AUTORREFERIDO
+        // ==========================================
+        const renderReferralModal = () => {
+            if (!state.referralModalOpen) return '';
+            return `
+                <div role="dialog" aria-modal="true" aria-labelledby="referral-title" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-fadeIn overflow-y-auto">
+                    <div class="bg-white border border-slate-300 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative my-8">
+                        <button type="button" aria-label="Cerrar ventana de referidos" onclick="closeReferralModal()" class="absolute top-5 right-5 p-2 rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 transition-colors">
+                            ✕
                         </button>
-                        <div className="flex items-center gap-2.5">
-                            <BrandLogo className="w-9 h-9 sm:w-10 sm:h-10" />
-                            <span className="text-lg sm:text-xl font-extrabold tracking-tight text-white">
-                                MIGA <span className="text-amber-500">REAL</span>
+
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <span class="bg-red-50 text-red-700 border border-red-200 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                                Registro Verificado Anti-Fraude
                             </span>
                         </div>
-                        <div className="w-20 sm:w-24 text-right">
-                            <span className="text-[10px] sm:text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">Seguro 🔒</span>
-                        </div>
-                    </header>
 
-                    <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-                        <div className="text-center mb-10">
-                            <span className="text-amber-400 font-bold tracking-wider uppercase text-xs bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">Comanda Digital Mayorista</span>
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mt-3 mb-3 text-white">Armá tu <span className="text-amber-500">Pedido</span></h1>
-                            <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">Seleccioná las variedades para tu mostrador, incluyendo nuestros sabores especiales exclusivos, y programá tus reposiciones.</p>
-                        </div>
+                        <h2 id="referral-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                            Pre-registrá tu Comercio Referido
+                        </h2>
+                        <p class="text-slate-700 text-sm mt-1.5 leading-relaxed font-medium">
+                            Registrá los datos del nuevo comercio <strong>antes</strong> de su primer pedido. El premio de <strong>$10.000</strong> se liquida cuando el comercio referido recibe y abona su <strong>2° pedido mayorista regular (mín. 16 envases en el 1° y 2° pedido)</strong>.
+                        </p>
 
-                        <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative">
-                            {/* Panel Izquierdo: Productos y Opciones B2B */}
-                            <div className="lg:col-span-7 space-y-8">
+                        ${state.referralError ? `
+                            <div role="alert" class="mt-4 p-3.5 bg-red-50 border border-red-300 rounded-2xl text-xs sm:text-sm font-bold text-red-800">
+                                ⚠️ ${escapeHtml(state.referralError)}
+                            </div>
+                        ` : ''}
+
+                        <form id="referral-form" onsubmit="submitReferralForm(event)" class="mt-5 space-y-4">
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900">1. Tus Datos (Quien cobra los $10.000)</h3>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label for="ref-tuNombre" class="block text-xs font-bold text-slate-800 mb-1">Tu Nombre o Comercio *</label>
+                                        <input required id="ref-tuNombre" name="tuNombre" placeholder="Ej. Kiosco Central" class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl font-medium text-slate-900 focus:border-red-600 outline-none" />
+                                    </div>
+                                    <div>
+                                        <label for="ref-tuWhatsapp" class="block text-xs font-bold text-slate-800 mb-1">Tu WhatsApp *</label>
+                                        <input required type="tel" id="ref-tuWhatsapp" name="tuWhatsapp" placeholder="Ej. 11 2345 6789" class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl font-medium text-slate-900 focus:border-red-600 outline-none" />
+                                    </div>
+                                </div>
                                 <div>
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-8 h-8 rounded-full bg-amber-500 flex shrink-0 items-center justify-center text-slate-950 font-bold">1</div>
-                                        <h2 className="text-xl sm:text-2xl font-bold text-white">Elegí tus Variedades</h2>
-                                    </div>
-                                    <p className="text-sm text-slate-400 ml-11 mb-6">
-                                        Pedido mínimo de <strong>16 envases</strong>. Múltiplos de 4 por molde de producción.
-                                    </p>
-                                    
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {ORDER_PRODUCTS.map(prod => (
-                                            <div key={prod.name} className={`p-5 rounded-3xl border transition-all flex flex-col justify-between group relative overflow-hidden backdrop-blur-md ${!prod.available ? 'opacity-60 bg-slate-950/40 border-slate-800' : prod.isSpecial ? 'bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/30 border-amber-500/50 shadow-xl shadow-amber-500/10' : 'bg-slate-900/80 border-slate-800 hover:border-amber-500/40 shadow-md'}`}>
-                                                {prod.isSpecial && (
-                                                    <div className={`absolute top-0 right-0 ${prod.available ? 'bg-gradient-to-l from-amber-500 to-orange-500 text-slate-950' : 'bg-slate-700 text-slate-300'} text-[10px] font-extrabold uppercase px-3.5 py-1 rounded-bl-xl shadow-md flex items-center gap-1 tracking-wider`}>
-                                                        <Sparkles className="w-3 h-3" /> {prod.available ? 'Especial' : 'Próximamente'}
-                                                    </div>
-                                                )}
-                                                <div className="mb-4">
-                                                    <div className="flex justify-between items-start mb-2">
-                                                        <div className={`p-2.5 rounded-2xl ${prod.bg}`}>
-                                                            <Package className={`w-5 h-5 ${prod.color}`} />
-                                                        </div>
-                                                        <span className="text-[10px] font-bold text-slate-400 bg-slate-950 px-2.5 py-1 rounded-md border border-slate-800">x2 unid.</span>
-                                                    </div>
-                                                    <h3 className="font-bold text-base sm:text-lg text-slate-100 group-hover:text-amber-400 transition-colors">{prod.name}</h3>
-                                                    <p className="text-sm text-slate-400 mt-1">{prod.available ? `$${prod.price.toLocaleString('es-AR')} /envase` : 'No disponible temporalmente'}</p>
-                                                </div>
-                                                
-                                                {prod.available ? (
-                                                    <div className="flex items-center justify-between rounded-2xl p-1.5 border bg-slate-950 border-slate-800">
-                                                        <button type="button" onClick={() => updateQty(prod.name, (order[prod.name] || 0) - 4)} className="w-10 h-10 rounded-xl flex items-center justify-center font-bold border transition-all text-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border-slate-700 active:scale-95">-</button>
-                                                        <span className="w-12 text-center font-bold text-lg text-white">{order[prod.name] || 0}</span>
-                                                        <button type="button" onClick={() => updateQty(prod.name, (order[prod.name] || 0) + 4)} className="w-10 h-10 rounded-xl flex items-center justify-center font-bold transition-all text-lg bg-amber-500 hover:bg-amber-600 text-slate-950 active:scale-95 shadow-md shadow-amber-500/20">+</button>
-                                                    </div>
-                                                ) : (
-                                                    <div className="text-center py-2 bg-slate-900 rounded-xl border border-slate-800 text-xs font-bold text-slate-500">
-                                                        Próximamente en stock
-                                                    </div>
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Feature 2: Suscripción Mayorista B2B (Programación Recurrente) */}
-                                <div className="bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-4 shadow-xl">
-                                    <div className="flex items-center gap-2.5">
-                                        <div className="p-2 rounded-xl bg-amber-500/10 text-amber-500">
-                                            <RefreshCw className="w-5 h-5" />
-                                        </div>
-                                        <h3 className="font-bold text-white text-base sm:text-lg">Suscripción Mayorista (Programación Recurrente)</h3>
-                                    </div>
-                                    <p className="text-xs sm:text-sm text-slate-400">Automatizá tus entregas semanales para garantizar stock fresco permanente en tus heladeras.</p>
-                                    
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                                        <label className={`flex items-center gap-3 p-4 rounded-2xl border cursor-pointer transition-all ${formData.recurrente === 'no' ? 'bg-amber-500/10 border-amber-500 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'}`}>
-                                            <input type="radio" name="recurrente" value="no" checked={formData.recurrente === 'no'} onChange={handleChange} className="accent-amber-500 w-4 h-4" />
-                                            <span className="text-xs sm:text-sm font-bold">Pedido Único</span>
-                                        </label>
-                                        <label className={`flex items-center gap-3 p-4 rounded-2xl border cursor-pointer transition-all ${formData.recurrente === 'si' ? 'bg-amber-500/10 border-amber-500 text-white shadow-md' : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'}`}>
-                                            <input type="radio" name="recurrente" value="si" checked={formData.recurrente === 'si'} onChange={handleChange} className="accent-amber-500 w-4 h-4" />
-                                            <span className="text-xs sm:text-sm font-bold">Programar Recurrente</span>
-                                        </label>
-                                    </div>
-
-                                    {formData.recurrente === 'si' && (
-                                        <div className="pt-2 animate-fadeIn">
-                                            <label className="block text-xs font-bold text-slate-400 mb-2 ml-1">Frecuencia de Reposición Automática</label>
-                                            <select name="frecuencia" value={formData.frecuencia} onChange={handleChange} className="w-full px-4 py-3.5 text-sm bg-slate-950 border border-slate-800 rounded-2xl focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none text-white font-medium shadow-inner">
-                                                <option value="Semanal (Martes y Jueves)">Semanal (Martes y Jueves)</option>
-                                                <option value="Quincenal (Miércoles)">Quincenal (Miércoles)</option>
-                                                <option value="Reposición Diaria de Lunes a Sábados">Reposición Diaria de Lunes a Sábados</option>
-                                            </select>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Feature 3: Programa de Referidos ("Suma un Kiosco Amigo") */}
-                                <div className="bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-3 shadow-xl">
-                                    <div className="flex items-center gap-2.5">
-                                        <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
-                                            <Award className="w-5 h-5" />
-                                        </div>
-                                        <h3 className="font-bold text-white text-base sm:text-lg">Programa "Suma un Kiosco Amigo"</h3>
-                                    </div>
-                                    <p className="text-xs sm:text-sm text-slate-400">¿Tenés colegas con comercios? Si referís un nuevo kiosco, ambos obtienen beneficios logísticos especiales en sus próximos pedidos.</p>
-                                    <input 
-                                        type="text" 
-                                        name="refCode" 
-                                        value={formData.refCode} 
-                                        onChange={handleChange} 
-                                        placeholder="Nombre o dirección del Kiosco que te recomendó (opcional)" 
-                                        className="w-full px-4 py-3.5 text-sm bg-slate-950 border border-slate-800 rounded-2xl focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none text-white font-medium placeholder-slate-600 shadow-inner"
-                                    />
+                                    <label for="ref-tuAlias" class="block text-xs font-bold text-slate-800 mb-1">Tu Alias o CBU para transferencia *</label>
+                                    <input required id="ref-tuAlias" name="tuAlias" placeholder="Ej. miga.real.mp" class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl font-medium text-slate-900 focus:border-red-600 outline-none" />
                                 </div>
                             </div>
 
-                            {/* Panel Derecho: Datos de Entrega y Resumen */}
-                            <div className="lg:col-span-5 relative">
-                                <div className="lg:sticky lg:top-24 space-y-8">
-                                    <div className="bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl">
-                                        <div className="flex items-center gap-3 mb-6">
-                                            <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-slate-950 font-bold">2</div>
-                                            <h2 className="text-xl font-bold text-white">Datos de Entrega</h2>
-                                        </div>
-                                        
-                                        <div className="space-y-4">
-                                            <div style={{ display: 'none' }} aria-hidden="true">
-                                                <input type="text" name="_honeypot" value={formData._honeypot} onChange={handleChange} tabIndex="-1" autoComplete="off" />
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900">2. Datos del Comercio Nuevo que Recomendás</h3>
+                                <div>
+                                    <label for="ref-comercioReferido" class="block text-xs font-bold text-slate-800 mb-1">Nombre del Kiosco / Almacén referido *</label>
+                                    <input required id="ref-comercioReferido" name="comercioReferido" placeholder="Ej. Almacén Lo de Tito" class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl font-medium text-slate-900 focus:border-red-600 outline-none" />
+                                </div>
+                                <div>
+                                    <label for="ref-direccionReferido" class="block text-xs font-bold text-slate-800 mb-1">Dirección exacta y Localidad (verificación en reparto) *</label>
+                                    <input required id="ref-direccionReferido" name="direccionReferido" placeholder="Calle, altura, entre calles y localidad" class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl font-medium text-slate-900 focus:border-red-600 outline-none" />
+                                </div>
+                                <div>
+                                    <label for="ref-contactoReferido" class="block text-xs font-bold text-slate-800 mb-1">WhatsApp del titular/encargado del comercio referido *</label>
+                                    <input required type="tel" id="ref-contactoReferido" name="contactoReferido" placeholder="Ej. 11 9876 5432 (distinto al tuyo)" class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl font-medium text-slate-900 focus:border-red-600 outline-none" />
+                                </div>
+                            </div>
+
+                            <label for="ref-consent" class="flex items-start gap-3 text-xs sm:text-sm text-slate-800 font-semibold bg-red-50 border border-red-200 rounded-2xl p-3.5 cursor-pointer">
+                                <input id="ref-consent" type="checkbox" required class="accent-red-600 w-4 h-4 mt-0.5 shrink-0" />
+                                <span>Declaro contar con el consentimiento del titular del comercio recomendado para compartir sus datos de contacto con Miga Real conforme a la <a href="#/privacidad" onclick="closeReferralModal()" class="underline font-extrabold text-red-700">Política de Privacidad (Ley 25.326)</a>.</span>
+                            </label>
+
+                            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-4 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 text-base active:scale-95">
+                                ${ICONS.send} Dejar Asentado mi Referido por WhatsApp
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        };
+
+        // ==========================================
+        // PÁGINAS LEGALES COMPLETAS (ARGENTINA)
+        // ==========================================
+        const renderTermsView = () => `
+            <div class="min-h-screen bg-[#ECEFF1] text-slate-900 p-4 sm:p-8 md:p-12">
+                <div class="max-w-4xl mx-auto bg-white p-6 sm:p-10 md:p-12 rounded-3xl border border-slate-300 shadow-md">
+                    <button type="button" onclick="navigateTo('')" class="mb-6 flex items-center gap-2 text-sm font-bold text-slate-800 hover:text-slate-950 bg-slate-100 px-4 py-2.5 rounded-full border border-slate-300">
+                        ${ICONS.arrowLeft} Volver al inicio
+                    </button>
+                    <h1 class="text-3xl md:text-4xl font-extrabold mb-4 text-slate-900 tracking-tight">Términos y Condiciones Comerciales Mayoristas</h1>
+                    <p class="text-xs font-bold mb-8 p-3.5 rounded-xl border text-red-800 bg-red-50 border-red-200">
+                        Precios y condiciones vigentes al ${PRICE_VALID_UNTIL} • Venta Mayorista Exclusiva para Comercios
+                    </p>
+                    <div class="space-y-6 text-slate-800 text-sm sm:text-base leading-relaxed">
+                        <section>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">1. Volumen Mínimo y Pack de Prueba Inicial</h2>
+                            <p>El pedido mayorista regular es de <strong>16 envases herméticos</strong> (equivalente a 32 sándwiches triples), fraccionado en múltiplos de 4 envases por molde de elaboración. Los comercios nuevos que realicen su primera compra podrán optar por única vez por el <strong>Pack Primer Pedido de Prueba de 8 envases</strong> (16 sándwiches) al precio mayorista vigente.</p>
+                        </section>
+                        <section>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">2. Vigencia de Precios y Medios de Pago</h2>
+                            <p>El precio mayorista publicado de <strong>$${WHOLESALE_PRICE.toLocaleString('es-AR')} ARS por envase de 2 sándwiches</strong> se encuentra vigente al <strong>${PRICE_VALID_UNTIL}</strong>. Debido a variaciones en costos de materias primas e insumos, los precios pueden actualizarse sin previo aviso, respetándose siempre el valor confirmado por Miga Real al tomar el pedido por WhatsApp. Medios de pago habilitados: <strong>Efectivo contra entrega</strong> o <strong>Transferencia bancaria / Mercado Pago</strong> acreditada al momento de la recepción.</p>
+                        </section>
+                        <section>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">3. Zonas de Reparto, Días y Horario de Corte</h2>
+                            <p>Realizamos entregas programadas sin cargo de envío en <strong>Paso del Rey, Moreno, Merlo, Ituzaingó, General Rodríguez y zonas aledañas del Corredor Oeste (GBA)</strong> de <strong>Lunes a Sábados</strong> en tres franjas horarias: Mañana (8 a 13 hs), Mediodía (13 a 16 hs) y Tarde (16 a 20 hs). <strong>Horario de corte:</strong> los pedidos recibidos y confirmados antes de las <strong>18:00 hs</strong> se elaboran y entregan en el reparto del día hábil siguiente.</p>
+                        </section>
+                        <section>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">4. Cadena de Frío, Recepción y Reclamos</h2>
+                            <p>Los sándwiches se entregan refrigerados, en envase termosellado/hermético con faja de seguridad inviolable. El comercio comprador se compromete a exhibirlos y conservarlos de forma ininterrumpida en heladera entre <strong>2 °C y 5 °C</strong> hasta su venta al consumidor final, respetando estrictamente la fecha de vencimiento impresa en el rótulo. Todo control de cantidad, estado del envase y temperatura debe efectuarse en el acto de entrega frente al repartidor, reponiéndose sin cargo cualquier envase que presente daño de transporte en dicho momento. Miga Real no se responsabiliza por deterioros derivados de cortes de suministro eléctrico o interrupción de la cadena de frío en el local del cliente.</p>
+                        </section>
+                        <section>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">5. Reglamento del Programa de Referidos ($10.000 ARS)</h2>
+                            <ul class="list-disc pl-6 space-y-1.5">
+                                <li><strong>Pre-registro previo:</strong> El comercio recomendado debe ser pre-registrado por quien refiere <em>antes</em> de que dicho comercio realice su primer contacto o pedido.</li>
+                                <li><strong>Validación física y prohibición de autorreferidos:</strong> El comercio recomendado debe ser un punto de venta físico real y nuevo en cartera, con domicilio y titular distintos a los del referidor. Quedan excluidos los autorreferidos, sucursales del mismo titular o pedidos fraccionados.</li>
+                                <li><strong>Condición de devengamiento unificada:</strong> El premio único de <strong>$10.000 ARS</strong> se abona una vez que el comercio referido recibe y abona su <strong>segunda (2°) compra mayorista regular</strong> (debiendo ser tanto el 1° como el 2° pedido de un mínimo de 16 envases cada uno).</li>
+                                <li><strong>Liquidación y facturación:</strong> El pago se efectiviza dentro de las 48 hs hábiles posteriores al cobro del 2° pedido mediante transferencia al Alias/CBU declarado o como nota de crédito/descuento en la siguiente compra mayorista del referidor, según corresponda impositivamente.</li>
+                            </ul>
+                        </section>
+                        <section class="pt-4 border-t border-slate-200 text-xs text-slate-600">
+                            <p><strong>Información Operativa y Sanitaria:</strong> ${escapeHtml(COMPANY.razonSocial)} • ${escapeHtml(COMPANY.domicilio)} • ${escapeHtml(COMPANY.manipulacion)} • ${escapeHtml(COMPANY.rotulado)}.</p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const renderPrivacyView = () => `
+            <div class="min-h-screen bg-[#ECEFF1] text-slate-900 p-4 sm:p-8 md:p-12">
+                <div class="max-w-4xl mx-auto bg-white p-6 sm:p-10 md:p-12 rounded-3xl border border-slate-300 shadow-md">
+                    <button type="button" onclick="navigateTo('')" class="mb-6 flex items-center gap-2 text-sm font-bold text-slate-800 hover:text-slate-950 bg-slate-100 px-4 py-2.5 rounded-full border border-slate-300">
+                        ${ICONS.arrowLeft} Volver al inicio
+                    </button>
+                    <h1 class="text-3xl md:text-4xl font-extrabold mb-4 text-slate-900 tracking-tight">Política de Privacidad y Protección de Datos</h1>
+                    <p class="text-xs font-bold mb-8 p-3.5 rounded-xl border text-slate-800 bg-slate-100 border-slate-300">
+                        En cumplimiento de la Ley N° 25.326 de Protección de los Datos Personales (República Argentina) • Vigente al ${PRICE_VALID_UNTIL}
+                    </p>
+                    <div class="space-y-6 text-slate-800 text-sm sm:text-base leading-relaxed">
+                        <section>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">1. Responsable del Tratamiento</h2>
+                            <p><strong>${escapeHtml(COMPANY.razonSocial)}</strong>, con base operativa en ${escapeHtml(COMPANY.domicilio)}, teléfono de contacto +54 9 11 3823-5784.</p>
+                        </section>
+                        <section>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">2. Datos Recolectados y Finalidad</h2>
+                            <ul class="list-disc pl-6 space-y-1.5">
+                                <li><strong>Gestión de Pedidos B2B:</strong> nombre del comercio, número de WhatsApp, dirección de entrega, localidad y franja horaria de recepción, utilizados exclusivamente para procesar pedidos, coordinar el reparto refrigerado y emitir la documentación respaldatoria.</li>
+                                <li><strong>Programa de Referidos:</strong> nombre, WhatsApp y Alias/CBU del referidor (para liquidar el beneficio de $10.000), junto con el nombre comercial, dirección y teléfono del comercio recomendado (al solo efecto de auditar la preexistencia y verificar la entrega en ruta).</li>
+                                <li><strong>Almacenamiento temporal en el navegador:</strong> este sitio utiliza <code>sessionStorage</code> únicamente para conservar el borrador de tu comanda mientras mantengas abierta la pestaña, evitando que pierdas tu selección si navegás entre secciones.</li>
+                            </ul>
+                        </section>
+                        <section>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">3. Consentimiento sobre Datos de Terceros Referidos</h2>
+                            <p>El usuario que utiliza el formulario de pre-registro de referidos declara bajo su exclusiva responsabilidad haber informado previamente al titular o encargado del comercio recomendado y contar con su autorización expresa para facilitar su nombre comercial, dirección y teléfono de contacto comercial a Miga Real.</p>
+                        </section>
+                        <section>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">4. Confidencialidad y Derechos ARCO (Ley 25.326)</h2>
+                            <p>Miga Real no vende, alquila ni cede datos personales a terceros ajenos a la operatoria de entrega. El titular de los datos personales tiene la facultad de ejercer el derecho de acceso, rectificación, actualización o supresión de sus datos en forma gratuita a intervalos no inferiores a seis meses, solicitándolo por WhatsApp al +54 9 11 3823-5784. <em>"LA AGENCIA DE ACCESO A LA INFORMACIÓN PÚBLICA, en su carácter de Órgano de Control de la Ley N° 25.326, tiene la atribución de atender las denuncias y reclamos que interpongan quienes resulten afectados en sus derechos por incumplimiento de las normas vigentes en materia de protección de datos personales."</em></p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // ==========================================
+        // VISTA DE COMANDA MAYORISTA (CON PACK PRUEBA 8 ENVASES)
+        // ==========================================
+        const renderRegisterView = () => {
+            const minPacks = state.formData.tipoPedido === 'prueba' ? 8 : 16;
+            const totalPacks = Object.values(state.order).reduce((a, b) => a + b, 0);
+            const totalAmount = totalPacks * WHOLESALE_PRICE;
+            const dias = state.formData.diasRecurrentes || [];
+
+            return `
+                <div class="min-h-screen bg-[#ECEFF1] text-slate-900 flex flex-col">
+                    <header class="sticky top-0 z-50 bg-[#111827]/95 backdrop-blur-md border-b border-slate-800 px-4 py-3.5 sm:px-6 lg:px-8 flex items-center justify-between shadow-md">
+                        <button type="button" onclick="navigateTo('')" class="flex items-center gap-2 text-sm font-bold text-white hover:text-red-300 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full border border-slate-700 transition-all">
+                            ${ICONS.arrowLeft} <span>Volver (se guarda tu pedido)</span>
+                        </button>
+                        <div class="flex items-center gap-2.5">
+                            ${renderBrandLogo("w-9 h-9 sm:w-10 sm:h-10")}
+                            <span class="text-lg sm:text-xl font-extrabold tracking-tight text-white">
+                                MIGA <span class="text-red-500">REAL</span>
+                            </span>
+                        </div>
+                        <div class="hidden sm:block text-right">
+                            <span class="text-xs font-bold text-emerald-300 bg-emerald-950/90 px-3 py-1 rounded-full border border-emerald-700">Corte diario 18:00 hs</span>
+                        </div>
+                    </header>
+
+                    <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+                        <div class="text-center mb-8">
+                            <span class="text-red-800 font-extrabold tracking-wider uppercase text-xs bg-red-50 px-4 py-1.5 rounded-full border border-red-200">Comanda Digital Mayorista • Precios al ${PRICE_VALID_UNTIL}</span>
+                            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mt-3 mb-2 text-slate-900">Armá tu <span class="text-red-600">Pedido B2B</span></h1>
+                            <p class="text-slate-700 text-sm sm:text-base max-w-xl mx-auto font-medium">Tu selección queda guardada automáticamente mientras navegás. Pedidos antes de las 18:00 hs se entregan mañana.</p>
+                        </div>
+
+                        <form onsubmit="submitOrderForm(event)" class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative">
+                            <div class="lg:col-span-7 space-y-8">
+                                <!-- Selector de Modalidad: Pedido Regular (16) vs Pack Prueba Primer Pedido (8) -->
+                                <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-300 shadow-sm">
+                                    <span class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-3">Modalidad de Compra</span>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <button type="button" onclick="setOrderMode('regular')" aria-pressed="${state.formData.tipoPedido === 'regular'}" class="text-left p-4 rounded-2xl border transition-all ${state.formData.tipoPedido === 'regular' ? 'bg-red-50 border-red-600 ring-1 ring-red-600' : 'bg-slate-50 border-slate-200 hover:bg-slate-100'}">
+                                            <div class="flex items-center justify-between">
+                                                <span class="font-extrabold text-sm sm:text-base text-slate-900">Pedido Mayorista Regular</span>
+                                                <span class="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-slate-900 text-white">Mín. 16 env.</span>
                                             </div>
-                                            
-                                            {[ 
-                                                { label: "Nombre del Comercio", name: "nombreComercio", icon: Store, ph: "Ej. Kiosco El Paso", type: "text" }, 
-                                                { label: "WhatsApp (con código de área)", name: "whatsapp", icon: Phone, ph: "Ej. 11 1234 5678", type: "tel" }, 
-                                                { label: "Dirección de Recepción", name: "direccion", icon: MapPin, ph: "Calle, Número, Localidad", type: "text" }, 
-                                                { label: "Rango de Horarios de Atención", name: "horario", icon: Clock, ph: "Ej. Lunes a Sábados 8 a 20hs", type: "text" } 
-                                            ].map((field, idx) => (
-                                                <div key={idx}>
-                                                    <label htmlFor={field.name} className="block text-xs font-bold text-slate-400 mb-1.5 ml-1">{field.label}</label>
-                                                    <div className="relative group">
-                                                        <field.icon className="absolute left-4 top-3.5 w-4 h-4 text-slate-500 group-focus-within:text-amber-500 transition-colors" />
-                                                        <input 
-                                                            required 
-                                                            id={field.name}
-                                                            type={field.type} 
-                                                            name={field.name} 
-                                                            value={formData[field.name]} 
-                                                            onChange={handleChange} 
-                                                            className="w-full pl-11 pr-4 py-3.5 text-sm bg-slate-950 border border-slate-800 rounded-2xl focus:bg-slate-900 focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all font-medium text-white placeholder-slate-600 shadow-inner" 
-                                                            placeholder={field.ph} 
-                                                        />
+                                            <p class="text-xs text-slate-700 mt-1 font-medium">Reposición habitual para comercios activos (válido para programa de referidos).</p>
+                                        </button>
+                                        <button type="button" onclick="setOrderMode('prueba')" aria-pressed="${state.formData.tipoPedido === 'prueba'}" class="text-left p-4 rounded-2xl border transition-all ${state.formData.tipoPedido === 'prueba' ? 'bg-emerald-50 border-emerald-600 ring-1 ring-emerald-600' : 'bg-slate-50 border-slate-200 hover:bg-slate-100'}">
+                                            <div class="flex items-center justify-between">
+                                                <span class="font-extrabold text-sm sm:text-base text-slate-900">Pack 1° Pedido de Prueba</span>
+                                                <span class="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-700 text-white">Mín. 8 env.</span>
+                                            </div>
+                                            <p class="text-xs text-slate-700 mt-1 font-medium">Exclusivo 1° compra para probar rotación en tu heladera con baja inversión ($16.000).</p>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Selección de Variedades -->
+                                <div>
+                                    <div class="flex items-center justify-between gap-3 mb-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-full bg-slate-900 text-white flex shrink-0 items-center justify-center font-extrabold">1</div>
+                                            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Elegí tus Variedades</h2>
+                                        </div>
+                                        ${totalPacks > 0 ? `<button type="button" onclick="clearOrder()" class="text-xs font-bold text-red-700 hover:underline">Vaciar selección</button>` : ''}
+                                    </div>
+                                    <p class="text-sm sm:text-base text-slate-700 ml-11 mb-5 font-medium">
+                                        Mínimo actual: <strong class="text-red-700 font-extrabold">${minPacks} envases</strong> (${minPacks * 2} sándwiches). Incrementos de a 4 envases por molde.
+                                    </p>
+
+                                    <div class="space-y-3.5">
+                                        ${PRODUCTS.map(prod => {
+                                            const qty = state.order[prod.name] || 0;
+                                            return `
+                                                <div class="p-4 sm:p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative overflow-hidden ${!prod.available ? 'opacity-60 bg-slate-100 border-slate-300' : prod.isSpecial ? 'bg-white border-red-300 shadow-md ring-1 ring-red-500/20' : 'bg-white border-slate-300 shadow-sm'}">
+                                                    <div class="flex items-center gap-3.5 flex-1">
+                                                        <img src="${prod.image}" alt="${escapeHtml(prod.name)}" loading="lazy" width="64" height="64" onerror="this.style.display='none'" class="w-16 h-16 rounded-2xl object-cover border border-slate-200 shrink-0 bg-slate-100" />
+                                                        <div>
+                                                            <div class="flex flex-wrap items-center gap-2">
+                                                                <h3 class="font-extrabold text-base sm:text-lg text-slate-900">${escapeHtml(prod.name)}</h3>
+                                                                <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-md ${prod.tagColor}">${escapeHtml(prod.badge)}</span>
+                                                            </div>
+                                                            <p class="text-xs sm:text-sm text-slate-700 font-medium mt-0.5">
+                                                                ${prod.available ? `$${prod.price.toLocaleString('es-AR')} por envase cerrado (2 sándwiches • ${escapeHtml(prod.vidaUtil.split(' ')[0])} días vida útil)` : 'Próximamente disponible'}
+                                                            </p>
+                                                        </div>
                                                     </div>
+
+                                                    ${prod.available ? `
+                                                        <div class="flex items-center justify-between sm:justify-end gap-3 rounded-2xl p-1.5 border bg-slate-50 border-slate-300 shrink-0">
+                                                            <button type="button" aria-label="Restar 4 envases de ${escapeHtml(prod.name)}" onclick="updateQty('${escapeHtml(prod.name)}', -4)" class="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold border bg-white hover:bg-slate-100 text-slate-900 border-slate-300 text-base active:scale-95">-</button>
+                                                            <span class="w-10 text-center font-extrabold text-lg text-slate-900" aria-live="polite">${qty}</span>
+                                                            <button type="button" aria-label="Sumar 4 envases de ${escapeHtml(prod.name)}" onclick="updateQty('${escapeHtml(prod.name)}', 4)" class="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-base bg-red-600 hover:bg-red-700 text-white active:scale-95 shadow-sm">+</button>
+                                                        </div>
+                                                    ` : `
+                                                        <div class="px-4 py-2 bg-slate-200 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 text-center">
+                                                            Sin Stock
+                                                        </div>
+                                                    `}
                                                 </div>
-                                            ))}
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+
+                                <!-- Suscripción y Días Recurrentes -->
+                                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-300 space-y-4 shadow-sm">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="p-2.5 rounded-xl bg-red-50 text-red-700 border border-red-200">
+                                            ${ICONS.refresh}
+                                        </div>
+                                        <h3 class="font-extrabold text-slate-900 text-lg">Frecuencia de Entrega (Suscripción Programada)</h3>
+                                    </div>
+                                    <p class="text-sm text-slate-700 font-medium">Podés hacer un pedido único o dejar programados los días y horarios exactos de reposición semanal.</p>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                                        <label class="flex items-center gap-3 p-4 rounded-2xl border cursor-pointer transition-all ${state.formData.recurrente === 'no' ? 'bg-red-50 border-red-600 text-slate-900 font-extrabold' : 'bg-slate-50 border-slate-300 text-slate-800 font-semibold'}">
+                                            <input type="radio" name="recurrente" value="no" ${state.formData.recurrente === 'no' ? 'checked' : ''} onchange="updateFormField('recurrente', 'no', true)" class="accent-red-600 w-4 h-4" />
+                                            <span class="text-sm">Pedido Único</span>
+                                        </label>
+                                        <label class="flex items-center gap-3 p-4 rounded-2xl border cursor-pointer transition-all ${state.formData.recurrente === 'si' ? 'bg-red-50 border-red-600 text-slate-900 font-extrabold' : 'bg-slate-50 border-slate-300 text-slate-800 font-semibold'}">
+                                            <input type="radio" name="recurrente" value="si" ${state.formData.recurrente === 'si' ? 'checked' : ''} onchange="updateFormField('recurrente', 'si', true)" class="accent-red-600 w-4 h-4" />
+                                            <span class="text-sm">Programar Entregas Recurrentes</span>
+                                        </label>
+                                    </div>
+
+                                    ${state.formData.recurrente === 'si' ? `
+                                        <div class="pt-4 space-y-4 border-t border-slate-200">
+                                            <div>
+                                                <span class="block text-xs font-extrabold text-slate-800 mb-2.5 ml-1">Elegí los días de la semana para recibir tu reposición:</span>
+                                                ${state.daysError ? `<p role="alert" class="mb-2.5 ml-1 text-xs font-bold text-red-700">⚠️ Seleccioná al menos un día de entrega para tu suscripción recurrente.</p>` : ''}
+                                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                                    ${["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábados"].map(dia => {
+                                                        const sel = dias.includes(dia);
+                                                        return `
+                                                            <button type="button" aria-pressed="${sel}" onclick="toggleRecurringDay('${dia}')" class="py-2.5 px-3 rounded-xl border text-xs font-extrabold transition-all ${sel ? 'bg-red-600 text-white border-red-600 shadow-sm' : 'bg-slate-50 text-slate-800 border-slate-300 hover:bg-slate-100'}">
+                                                                ${dia} ${sel ? '✓' : ''}
+                                                            </button>
+                                                        `;
+                                                    }).join('')}
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <label for="franjaHoraria" class="block text-xs font-extrabold text-slate-800 mb-2 ml-1">Franja horaria preferida de recepción</label>
+                                                <select id="franjaHoraria" name="franjaHoraria" onchange="updateFormField('franjaHoraria', this.value, false)" class="w-full px-4 py-3.5 text-sm bg-slate-50 border border-slate-300 rounded-2xl text-slate-900 font-bold">
+                                                    ${["Mañana (8 a 13 hs)", "Mediodía (13 a 16 hs)", "Tarde (16 a 20 hs)"].map(f => `
+                                                        <option value="${f}" ${state.formData.franjaHoraria === f ? 'selected' : ''}>${f}</option>
+                                                    `).join('')}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+
+                                <!-- Validación Cruzada de Referido -->
+                                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-red-200 space-y-3 shadow-sm">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="p-2.5 rounded-xl bg-red-600 text-white font-extrabold text-sm">$10k</div>
+                                        <div>
+                                            <h3 class="font-extrabold text-slate-900 text-lg">¿Te recomendó otro comerciante?</h3>
+                                            <span class="text-xs font-bold text-red-700">Validación cruzada del premio de $10.000 (al cumplir tu 2° pedido de 16+ envases)</span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                        <div>
+                                            <label for="refNombre" class="block text-xs font-bold text-slate-800 mb-1">Nombre o Kiosco que te recomendó (Opcional)</label>
+                                            <input id="refNombre" type="text" value="${escapeHtml(state.formData.refNombre)}" oninput="updateFormField('refNombre', this.value, false)" placeholder="Ej. Kiosco El Paso" class="w-full px-4 py-3 text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 font-semibold placeholder-slate-500" />
+                                        </div>
+                                        <div>
+                                            <label for="refTelefono" class="block text-xs font-bold text-slate-800 mb-1">WhatsApp de quien te recomendó (Opcional)</label>
+                                            <input id="refTelefono" type="tel" value="${escapeHtml(state.formData.refTelefono)}" oninput="updateFormField('refTelefono', this.value, false)" placeholder="Ej. 11 2345 6789" class="w-full px-4 py-3 text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 font-semibold placeholder-slate-500" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Columna Derecha: Datos de Entrega y Resumen -->
+                            <div class="lg:col-span-5 relative">
+                                <div class="lg:sticky lg:top-24 space-y-8">
+                                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-300 shadow-sm">
+                                        <div class="flex items-center gap-3 mb-6">
+                                            <div class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-extrabold">2</div>
+                                            <h2 class="text-xl font-extrabold text-slate-900">Datos de Recepción y Pago</h2>
+                                        </div>
+
+                                        <div class="space-y-4">
+                                            <div>
+                                                <label for="nombreComercio" class="block text-xs font-extrabold text-slate-800 mb-1.5 ml-1">Nombre del Comercio *</label>
+                                                <input required id="nombreComercio" type="text" value="${escapeHtml(state.formData.nombreComercio)}" oninput="updateFormField('nombreComercio', this.value, false)" placeholder="Ej. Kiosco El Paso" class="w-full px-4 py-3.5 text-sm bg-slate-50 border border-slate-300 rounded-2xl focus:bg-white focus:border-red-600 outline-none font-semibold text-slate-900 placeholder-slate-500" />
+                                            </div>
+                                            <div>
+                                                <label for="whatsapp" class="block text-xs font-extrabold text-slate-800 mb-1.5 ml-1">WhatsApp del Comercio (con código de área) *</label>
+                                                <input required id="whatsapp" type="tel" value="${escapeHtml(state.formData.whatsapp)}" oninput="updateFormField('whatsapp', this.value, false)" placeholder="Ej. 11 1234 5678" class="w-full px-4 py-3.5 text-sm bg-slate-50 border border-slate-300 rounded-2xl focus:bg-white focus:border-red-600 outline-none font-semibold text-slate-900 placeholder-slate-500" />
+                                            </div>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                <div>
+                                                    <label for="localidad" class="block text-xs font-extrabold text-slate-800 mb-1.5 ml-1">Localidad (Zona Oeste) *</label>
+                                                    <select id="localidad" onchange="updateFormField('localidad', this.value, false)" class="w-full px-3.5 py-3.5 text-sm bg-slate-50 border border-slate-300 rounded-2xl font-bold text-slate-900">
+                                                        ${["Paso del Rey", "Moreno", "Merlo", "Ituzaingó", "General Rodríguez", "Otra localidad (consultar)"].map(loc => `
+                                                            <option value="${loc}" ${state.formData.localidad === loc ? 'selected' : ''}>${loc}</option>
+                                                        `).join('')}
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label for="medioPago" class="block text-xs font-extrabold text-slate-800 mb-1.5 ml-1">Medio de Pago *</label>
+                                                    <select id="medioPago" onchange="updateFormField('medioPago', this.value, false)" class="w-full px-3.5 py-3.5 text-sm bg-slate-50 border border-slate-300 rounded-2xl font-bold text-slate-900">
+                                                        ${["Efectivo contra entrega", "Transferencia / Mercado Pago"].map(mp => `
+                                                            <option value="${mp}" ${state.formData.medioPago === mp ? 'selected' : ''}>${mp}</option>
+                                                        `).join('')}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label for="direccion" class="block text-xs font-extrabold text-slate-800 mb-1.5 ml-1">Dirección Exacta de Entrega *</label>
+                                                <input required id="direccion" type="text" value="${escapeHtml(state.formData.direccion)}" oninput="updateFormField('direccion', this.value, false)" placeholder="Calle, altura y entre calles" class="w-full px-4 py-3.5 text-sm bg-slate-50 border border-slate-300 rounded-2xl focus:bg-white focus:border-red-600 outline-none font-semibold text-slate-900 placeholder-slate-500" />
+                                            </div>
+                                            <div>
+                                                <label for="horario" class="block text-xs font-extrabold text-slate-800 mb-1.5 ml-1">Horario de Atención del Local *</label>
+                                                <input required id="horario" type="text" value="${escapeHtml(state.formData.horario)}" oninput="updateFormField('horario', this.value, false)" placeholder="Ej. Lunes a Sábados de 8 a 20 hs" class="w-full px-4 py-3.5 text-sm bg-slate-50 border border-slate-300 rounded-2xl focus:bg-white focus:border-red-600 outline-none font-semibold text-slate-900 placeholder-slate-500" />
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-1 rounded-3xl overflow-hidden shadow-2xl relative">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent pointer-events-none"></div>
-                                        <div className="bg-slate-950 rounded-[22px] p-6 sm:p-8 relative z-10">
-                                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-800 pb-3">Resumen de Pedido</h3>
-                                            
-                                            <div className="flex justify-between items-end mb-2">
-                                                <span className="text-slate-300 font-medium">Total Envases:</span>
-                                                <span className={`text-2xl font-extrabold ${totalPacks < 16 && totalPacks > 0 ? 'text-red-400' : 'text-white'}`}>{totalPacks} un.</span>
-                                            </div>
-                                            <div className="flex justify-between items-end mb-6">
-                                                <span className="text-slate-300 font-medium">Monto Estimado:</span>
-                                                <span className="text-3xl font-extrabold text-amber-400">${totalAmount.toLocaleString('es-AR')}</span>
-                                            </div>
-
-                                            {showError && (
-                                                <div className="mb-4 p-3.5 bg-red-500/10 border border-red-500/20 rounded-2xl text-center flex items-start gap-2.5">
-                                                    <span className="text-red-400 shrink-0 text-base">⚠️</span>
-                                                    <p className="text-red-400 text-xs sm:text-sm font-bold text-left leading-relaxed">
-                                                        El pedido mínimo es de 16 envases para precio mayorista. Faltan {16 - totalPacks} envases.
-                                                    </p>
-                                                </div>
-                                            )}
-
-                                            <button type="submit" className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-extrabold py-4 rounded-2xl shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 text-base active:scale-95">
-                                                <Send className="w-5 h-5" /> Confirmar y Enviar Comanda
-                                            </button>
-                                            
-                                            <p className="text-[10px] text-slate-500 text-center mt-4 flex items-center justify-center gap-1.5">
-                                                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Tus datos viajan seguros por WhatsApp (E2EE)
-                                            </p>
+                                    <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl">
+                                        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                                            <h3 class="text-xs font-extrabold text-slate-200 uppercase tracking-wider">Resumen de Comanda</h3>
+                                            <span class="text-xs font-bold text-emerald-300">${state.formData.tipoPedido === 'prueba' ? 'Pack Prueba (Mín. 8)' : 'Mayorista Regular (Mín. 16)'}</span>
                                         </div>
+
+                                        <div class="flex justify-between items-end mb-2">
+                                            <span class="text-slate-200 font-semibold">Total Envases (x2 sándwiches):</span>
+                                            <span class="text-2xl font-extrabold ${totalPacks < minPacks && totalPacks > 0 ? 'text-red-400' : 'text-white'}">${totalPacks} env. (${totalPacks * 2} un.)</span>
+                                        </div>
+                                        <div class="flex justify-between items-end mb-6">
+                                            <span class="text-slate-200 font-semibold">Total Mayorista Estimado:</span>
+                                            <span class="text-3xl font-extrabold text-red-400">$${totalAmount.toLocaleString('es-AR')}</span>
+                                        </div>
+
+                                        ${state.orderError ? `
+                                            <div role="alert" class="mb-4 p-3.5 bg-red-950 border border-red-600 rounded-2xl text-left flex items-start gap-2.5">
+                                                <span class="text-red-300 shrink-0 text-base">⚠️</span>
+                                                <p class="text-red-100 text-xs sm:text-sm font-bold leading-relaxed">${escapeHtml(state.orderError)}</p>
+                                            </div>
+                                        ` : ''}
+
+                                        <button type="submit" class="w-full bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-extrabold py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 text-base active:scale-95">
+                                            ${ICONS.whatsapp} Confirmar y Enviar Pedido por WhatsApp
+                                        </button>
+
+                                        <p class="text-xs text-slate-200 text-center mt-4 flex items-center justify-center gap-1.5 font-medium">
+                                            Al enviar aceptás los <a href="#/terminos" class="underline text-white font-bold">Términos Comerciales</a> y la cadena de frío (2 °C a 5 °C).
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </main>
                 </div>
-            );
-        });
+            `;
+        };
 
-        const LandingPage = ({ onNavigateToRegister, onNavigateToTerms, onNavigateToPrivacy }) => {
-            const [scrolled, setScrolled] = useState(false);
-            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-            const [packCount, setPackCount] = useState(32);
-            const [openFaq, setOpenFaq] = useState(null);
+        // ==========================================
+        // VISTA PRINCIPAL (LANDING CORPORATIVA B2B)
+        // ==========================================
+        const renderLandingView = () => {
+            const totalInvestment = state.packCount * WHOLESALE_PRICE;
+            const totalRevenue = state.packCount * SUGGESTED_RETAIL_PRICE;
+            const grossMargin = totalRevenue - totalInvestment;
 
-            useEffect(() => {
-                const handleScroll = () => {
-                    setScrolled(window.scrollY > 20);
-                };
-                window.addEventListener('scroll', handleScroll, { passive: true });
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
+            return `
+                <div class="min-h-screen bg-[#ECEFF1] text-[#111827]">
+                    ${renderReferralModal()}
 
-            const wholesalePricePerPack = 2000;
-            const suggestedRetailPrice = 3500;
-            const totalInvestment = packCount * wholesalePricePerPack;
-            const totalRevenue = packCount * suggestedRetailPrice;
-            const totalProfit = totalRevenue - totalInvestment;
+                    <!-- Botón Flotante de WhatsApp en Móvil y Escritorio -->
+                    <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" onclick="trackEvent('floating_wa_click')" aria-label="Contactar por WhatsApp" class="fixed bottom-5 right-5 z-30 bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 px-4 py-3.5 rounded-full shadow-2xl flex items-center gap-2 font-extrabold text-sm border border-emerald-700 active:scale-95 transition-transform">
+                        ${ICONS.whatsapp}
+                        <span class="hidden sm:inline">WhatsApp Directo</span>
+                    </a>
 
-            const handleSliderChange = (e) => {
-                let val = parseInt(e.target.value);
-                if (val < 16) val = 16;
-                val = Math.round(val / 4) * 4;
-                setPackCount(val);
-            };
-
-            const toggleFaq = (index) => {
-                setOpenFaq(openFaq === index ? null : index);
-            };
-
-            const scrollToSection = (e, id) => {
-                e.preventDefault();
-                setIsMobileMenuOpen(false);
-                const element = document.getElementById(id);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
-            };
-
-            const handleDownloadCatalog = () => {
-                const catalogContent = `MIGA REAL - CATALOGO MAYORISTA 2026\n---------------------------------------\n\n1. Jamón y Queso Clásico - EAN: 7798123450012 ($2.000 x envase x2 unid.)\n2. Tomate, Lechuga y Queso - EAN: 7798123450029 ($2.000 x envase x2 unid.)\n3. Salame y Queso - EAN: 7798123450036 ($2.000 x envase x2 unid.)\n4. [SABOR ESPECIAL] Aceituna y Queso - EAN: 7798123450043 ($2.000 x envase x2 unid.)\n5. [SABOR ESPECIAL] Roquefort con Jamón - EAN: 7798123450050 ($2.000 x envase x2 unid.)\n\nCONDICIONES:\n- Pedido mínimo: 16 envases.\n- Múltiplos de 4 por variedad.\n- Reposición diaria programada.\n- Mantener refrigerado entre 2°C y 5°C.\n\nContacto: ${getSecurePhone()}`;
-                
-                const blob = new Blob([catalogContent], { type: 'text/plain;charset=utf-8' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Catalogo_Mayorista_MigaReal.txt';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            };
-
-            return (
-                <div className="min-h-screen bg-slate-900 text-slate-100 font-poppins selection:bg-amber-500 selection:text-slate-950">
-                    <nav className={`fixed w-full z-40 font-poppins transition-all duration-200 ${scrolled || isMobileMenuOpen ? 'bg-slate-950/98 backdrop-blur-md shadow-2xl py-3 border-b border-slate-800' : 'bg-slate-950/80 backdrop-blur-sm py-4 border-b border-slate-800/40'}`}>
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="flex justify-between items-center h-10 sm:h-12">
-                                <div className="flex items-center cursor-pointer z-50" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-                                    <div className="flex items-center gap-2.5">
-                                        <BrandLogo className="w-10 h-10 sm:w-12 sm:h-12" />
-                                        <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
-                                            MIGA <span className="text-amber-500">REAL</span>
+                    <!-- Navbar Corporativo -->
+                    <nav class="fixed w-full z-40 bg-[#111827]/95 backdrop-blur-md shadow-md py-3.5 border-b border-slate-800 text-white">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="flex justify-between items-center h-10 sm:h-12">
+                                <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="flex items-center gap-2.5">
+                                    ${renderBrandLogo("w-10 h-10 sm:w-11 sm:h-11")}
+                                    <div>
+                                        <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-white block leading-none">
+                                            MIGA <span class="text-red-500">REAL</span>
                                         </span>
+                                        <span class="text-[11px] text-slate-200 font-semibold">Mayorista Zona Oeste</span>
                                     </div>
-                                </div>
-                                <div className="hidden md:flex items-center space-x-7">
-                                    {['Beneficios', 'Productos', 'Rentabilidad', 'FAQ'].map((item) => (
-                                        <a 
-                                            key={item} 
-                                            href={`#${item.toLowerCase()}`}
-                                            onClick={(e) => scrollToSection(e, item.toLowerCase())} 
-                                            className="text-sm font-semibold text-slate-300 hover:text-white transition-colors uppercase tracking-wider"
-                                        >
-                                            {item}
-                                        </a>
-                                    ))}
-                                    <a href={getSecureWaLink()} target="_blank" rel="noopener noreferrer" className="bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg flex items-center gap-2 active:scale-95">
-                                        <WhatsAppIcon className="w-4 h-4" /> Contacto
+                                </a>
+                                <div class="hidden md:flex items-center space-x-6">
+                                    <a href="#beneficios" class="text-sm font-extrabold text-slate-200 hover:text-red-400 transition-colors uppercase tracking-wider">Beneficios</a>
+                                    <a href="#productos" class="text-sm font-extrabold text-slate-200 hover:text-red-400 transition-colors uppercase tracking-wider">Catálogo y Rótulos</a>
+                                    <a href="#referidos" class="text-sm font-extrabold text-red-300 bg-red-950/80 px-3.5 py-1.5 rounded-full border border-red-700 hover:bg-red-900/70 transition-colors uppercase tracking-wider">Ganate $10.000</a>
+                                    <a href="#rentabilidad" class="text-sm font-extrabold text-slate-200 hover:text-red-400 transition-colors uppercase tracking-wider">Margen Bruto</a>
+                                    <a href="#faq" class="text-sm font-extrabold text-slate-200 hover:text-red-400 transition-colors uppercase tracking-wider">FAQ</a>
+                                    <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" onclick="trackEvent('nav_wa_click')" class="bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-extrabold px-5 py-2.5 rounded-full text-sm transition-all shadow-sm flex items-center gap-2">
+                                        ${ICONS.whatsapp} Contacto
                                     </a>
                                 </div>
-                                <div className="md:hidden flex items-center z-50">
-                                    <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Menú" className="text-white p-2.5 active:scale-95 transition-transform bg-slate-900 rounded-xl border border-slate-800">
-                                        {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                                <div class="md:hidden flex items-center">
+                                    <button type="button" onclick="toggleMobileMenu()" aria-label="Abrir menú de navegación" aria-expanded="${state.mobileMenuOpen}" class="text-white p-2.5 bg-slate-800 rounded-xl border border-slate-700 font-bold text-sm">
+                                        ${state.mobileMenuOpen ? '✕ Cerrar' : '☰ Menú'}
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        {isMobileMenuOpen && (
-                            <div className="md:hidden absolute top-full left-0 w-full bg-slate-950 border-t border-slate-800 shadow-2xl pb-6 animate-fadeIn">
-                                <div className="flex flex-col py-4 px-6 space-y-3">
-                                    {['Beneficios', 'Productos', 'Rentabilidad', 'FAQ'].map((item) => (
-                                        <a 
-                                            key={item} 
-                                            href={`#${item.toLowerCase()}`}
-                                            onClick={(e) => scrollToSection(e, item.toLowerCase())} 
-                                            className="text-left py-3 text-slate-200 font-semibold hover:text-amber-400 border-b border-slate-900 transition-colors text-base flex items-center justify-between"
-                                        >
-                                            <span>{item}</span>
-                                            <ArrowRight className="w-4 h-4 text-slate-500" />
-                                        </a>
-                                    ))} 
-                                    <div className="pt-3">
-                                        <a href={getSecureWaLink()} target="_blank" rel="noopener noreferrer" className="text-center w-full py-3.5 text-white font-bold bg-[#25D366] rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2 text-base active:scale-98">
-                                            <WhatsAppIcon className="w-5 h-5" /> Contactar por WhatsApp
-                                        </a>
-                                    </div>
+                        ${state.mobileMenuOpen ? `
+                            <div class="md:hidden bg-[#111827] border-b border-slate-800 shadow-xl pb-6 text-white px-6 pt-4 space-y-2">
+                                <a href="#beneficios" onclick="toggleMobileMenu(false)" class="block py-3 text-slate-100 font-bold border-b border-slate-800">Beneficios y Logística</a>
+                                <a href="#productos" onclick="toggleMobileMenu(false)" class="block py-3 text-slate-100 font-bold border-b border-slate-800">Catálogo y Fichas Técnicas</a>
+                                <a href="#referidos" onclick="toggleMobileMenu(false)" class="block py-3 text-red-300 font-extrabold border-b border-slate-800">🤝 Ganate $10.000 por Referido</a>
+                                <a href="#rentabilidad" onclick="toggleMobileMenu(false)" class="block py-3 text-slate-100 font-bold border-b border-slate-800">Calculadora de Margen Bruto</a>
+                                <a href="#faq" onclick="toggleMobileMenu(false)" class="block py-3 text-slate-100 font-bold border-b border-slate-800">Preguntas Frecuentes</a>
+                                <div class="pt-3">
+                                    <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 text-slate-950 font-extrabold bg-[#25D366] rounded-2xl flex items-center justify-center gap-2 text-base shadow-md">
+                                        ${ICONS.whatsapp} Contactar por WhatsApp
+                                    </a>
                                 </div>
                             </div>
-                        )}
+                        ` : ''}
                     </nav>
 
-                    <header className="hero-bg relative flex flex-col items-center justify-between w-full min-h-[85vh] sm:min-h-[90vh] md:min-h-screen pt-24 sm:pt-28 pb-16 text-white">
-                        <div className="w-full max-w-4xl mx-auto px-4 text-center flex flex-col items-center z-10 my-auto">
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 mb-5 shadow-sm">
-                                <span className="flex h-2 w-2 relative">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                                </span>
-                                <span className="text-amber-300 font-bold text-[11px] sm:text-xs tracking-wider uppercase">Distribución Mayorista Exclusiva</span>
+                    <!-- Hero Section -->
+                    <header class="relative flex flex-col items-center justify-between w-full pt-28 pb-16 bg-gradient-to-b from-[#111827] via-[#1F2937] to-[#ECEFF1] text-white border-b border-slate-300">
+                        <div class="w-full max-w-4xl mx-auto px-4 text-center flex flex-col items-center z-10 my-auto">
+                            <div class="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-red-950/90 border border-red-700 mb-6 shadow-sm">
+                                <span class="h-2.5 w-2.5 rounded-full bg-red-500"></span>
+                                <span class="text-red-200 font-extrabold text-xs tracking-wider uppercase">Abastecimiento Mayorista en Paso del Rey y Zona Oeste • Precios al ${PRICE_VALID_UNTIL}</span>
                             </div>
-                            
-                            <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight font-poppins tracking-tight text-white">
-                                Sándwiches de Miga <span className="text-amber-500">Artesanales</span> para Kioscos
-                            </h1>
-                            
-                            <p className="text-xs sm:text-sm md:text-base text-slate-300 font-normal mb-8 max-w-xl mx-auto leading-relaxed px-2">
-                                Sándwiches frescos con códigos de barras EAN-13, sabores especiales exclusivos y reposiciones programadas para tu mostrador.
-                            </p>
-                            
-                            <div className="flex flex-col xs:flex-row gap-3.5 w-full max-w-xs sm:max-w-md mx-auto">
-                                <button onClick={onNavigateToRegister} className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 px-6 py-4 rounded-2xl text-sm sm:text-base font-extrabold shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-0.5 transition-all active:scale-95 flex items-center justify-center gap-2.5">
-                                    <FileText className="w-5 h-5" /> Realizar Pedido
-                                </button>
-                                <button onClick={handleDownloadCatalog} className="w-full bg-slate-800 text-white border border-slate-700/80 px-6 py-4 rounded-2xl text-sm sm:text-base font-bold hover:bg-slate-750 transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md">
-                                    <Download className="w-4 h-4 text-amber-400" /> Catálogo PDF
-                                </button>
-                            </div>
-                        </div>
 
-                        <div className="mt-6 flex flex-col items-center justify-center text-slate-400 cursor-pointer z-20 w-fit mx-auto p-2" onClick={(e) => scrollToSection(e, 'beneficios')}>
-                            <span className="text-[10px] font-bold tracking-widest uppercase mb-1">Explorar</span>
-                            <ChevronDown className="w-4 h-4 text-amber-400 animate-bounce" />
+                            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-5 leading-tight tracking-tight text-white">
+                                Sándwiches de Miga <span class="text-red-500">Artesanales</span> para tu Kiosco o Comercio
+                            </h1>
+
+                            <p class="text-base sm:text-lg text-slate-200 font-medium mb-8 max-w-2xl mx-auto leading-relaxed">
+                                Envases herméticos por 2 unidades con faja de seguridad, etiqueta clara con fechas de elaboración/vencimiento e ingredientes, y reposición programada de Lunes a Sábados.
+                            </p>
+
+                            <div class="flex flex-col sm:flex-row gap-3.5 w-full max-w-lg mx-auto mb-4">
+                                <button type="button" onclick="navigateTo('#/pedido')" class="w-full bg-red-600 hover:bg-red-500 text-white px-6 py-4 rounded-2xl text-base font-extrabold shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2.5">
+                                    ${ICONS.fileText} Armar Pedido Online
+                                </button>
+                                <button type="button" onclick="handlePrintCatalog()" class="w-full bg-white text-slate-900 border border-slate-300 px-6 py-4 rounded-2xl text-base font-extrabold hover:bg-slate-100 transition-all active:scale-95 flex items-center justify-center gap-2 shadow-md">
+                                    ${ICONS.download} Descargar / Imprimir Catálogo PDF
+                                </button>
+                            </div>
+
+                            <div class="mb-6">
+                                <button type="button" onclick="startTrialOrder()" class="text-xs sm:text-sm font-extrabold text-emerald-200 bg-emerald-950/90 hover:bg-emerald-900 border border-emerald-600 px-4 py-2 rounded-full transition-colors">
+                                    ✨ ¿Primera vez comprando? Pedí tu Pack de Prueba Inicial de 8 envases ($16.000) →
+                                </button>
+                            </div>
+
+                            <!-- Franja de Garantía Institucional -->
+                            <div class="w-full max-w-2xl bg-[#111827] border border-slate-700 rounded-2xl p-4 shadow-xl flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-slate-100">
+                                <span class="text-red-400 flex items-center gap-1.5 text-xs sm:text-sm font-bold">${ICONS.shield} Trato directo de fábrica</span>
+                                <span class="hidden sm:inline text-slate-500">•</span>
+                                <span class="text-xs sm:text-sm font-bold">Corte de pedidos 18:00 hs</span>
+                                <span class="hidden sm:inline text-slate-500">•</span>
+                                <span class="text-xs sm:text-sm font-bold">Cadena de frío 2 °C a 5 °C</span>
+                            </div>
                         </div>
                     </header>
 
-                    <section id="beneficios" className="py-16 sm:py-24 bg-slate-950 font-poppins border-t border-slate-800">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
-                                <span className="text-amber-400 font-bold tracking-wider uppercase text-xs bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20 shadow-sm">Eficiencia Comercial</span>
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mt-4 tracking-tight">Diseñado para Kioscos y Almacenes</h2>
-                                <p className="text-slate-400 mt-3 text-sm sm:text-base">Soluciones logísticas reales con opción de suscripción y reposición automática.</p>
+                    <!-- Beneficios B2B -->
+                    <section id="beneficios" class="py-16 sm:py-20 bg-[#ECEFF1]">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="text-center mb-12 max-w-2xl mx-auto">
+                                <span class="text-red-700 font-extrabold tracking-wider uppercase text-xs bg-white px-4 py-1.5 rounded-full border border-slate-300 shadow-sm">Operativa B2B</span>
+                                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">Pensado para el Mostrador de tu Comercio</h2>
+                                <p class="text-slate-700 mt-3 text-base font-medium">Sin cortes de fiambre ni merma de pan en tu local: recibís el producto listo para exhibir y cobrar.</p>
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                                {DATA.b2bBenefits.map((item, i) => (
-                                    <div key={i} className="bg-slate-900/80 backdrop-blur-md p-8 rounded-3xl border border-slate-800 shadow-xl hover:border-slate-700 transition-all">
-                                        <div className={`w-14 h-14 sm:w-16 sm:h-16 ${item.bg} rounded-2xl flex items-center justify-center mb-6 shadow-inner`}>
-                                            <item.icon className={`${item.color} w-7 h-7 sm:w-8 sm:h-8`} />
-                                        </div>
-                                        <h3 className="text-lg sm:text-xl font-bold mb-3 text-white">{item.title}</h3>
-                                        <p className="text-slate-400 leading-relaxed text-xs sm:text-sm">{item.desc}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    <section id="productos" className="py-20 sm:py-28 bg-slate-900 font-poppins border-t border-slate-800/80 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/5 via-transparent to-transparent pointer-events-none"></div>
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                            <div className="text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
-                                <span className="text-emerald-400 font-bold tracking-wider uppercase text-xs bg-emerald-500/10 px-4 py-1.5 rounded-full border border-emerald-500/20 shadow-sm">Sabores y Especialidades</span>
-                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mt-4 tracking-tight">Nuestras Variedades de Sándwiches</h2>
-                                <p className="text-slate-400 mt-3.5 text-sm sm:text-base leading-relaxed">Calidad artesanal superior y máxima rotación garantizada para potenciar las ventas de tu mostrador.</p>
-                            </div>
-                            
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-10">
-                                {DATA.products.map((prod, i) => (
-                                    <div key={i} className={`rounded-3xl p-6 sm:p-8 border transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden backdrop-blur-md ${!prod.available ? 'opacity-60 bg-slate-950/40 border-slate-800' : prod.isSpecial ? 'bg-gradient-to-br from-slate-950 via-slate-950 to-amber-950/30 border-amber-500/50 shadow-2xl shadow-amber-500/10' : 'bg-slate-950/80 border-slate-800/80 hover:border-slate-700 shadow-xl'}`}>
-                                        {prod.isSpecial && (
-                                            <div className={`absolute top-0 right-0 left-0 ${prod.available ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 text-slate-950' : 'bg-slate-800 text-slate-400 border-b border-slate-700'} text-[10px] font-extrabold uppercase py-2 text-center shadow-md flex items-center justify-center gap-1.5 tracking-widest`}>
-                                                <Sparkles className="w-3.5 h-3.5" /> {prod.available ? 'Especial' : 'Próximamente'}
-                                            </div>
-                                        )}
-                                        <div className={prod.isSpecial ? 'mt-5' : ''}>
-                                            <div className="flex justify-between items-start mb-5">
-                                                <span className={`px-3.5 py-1.5 ${prod.tagColor} rounded-xl text-xs font-bold uppercase tracking-wider shadow-inner`}>{prod.badge}</span>
-                                                <span className="text-[11px] font-mono text-slate-400 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded-lg">EAN: {prod.code}</span>
-                                            </div>
-                                            
-                                            <ProductImageUploader productName={prod.name} defaultImage={null} />
-
-                                            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2.5 group-hover:text-amber-400 transition-colors">{prod.name}</h3>
-                                            <p className="text-slate-400 leading-relaxed text-xs sm:text-sm mb-6">{prod.desc}</p>
-                                        </div>
-                                        <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                                            <span className="font-medium text-slate-500">Presentación en Envase</span>
-                                            <span className={`${prod.available ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : 'text-slate-400 bg-slate-800 border-slate-700'} font-bold px-3 py-1 rounded-md border`}>{prod.available ? 'Alta Rotación' : 'Próximamente'}</span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    <section id="rentabilidad" className="py-16 sm:py-24 bg-slate-950 text-white font-poppins relative overflow-hidden border-t border-slate-800">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                            <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
-                                <span className="text-amber-400 font-bold tracking-wider uppercase text-xs bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">Calculadora Mayorista</span>
-                                <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mt-4 tracking-tight">Proyectá Tu Ganancia Neta</h2>
-                                <p className="text-slate-400 mt-3 text-sm sm:text-base">Calculá cuánto podés ganar sumando sándwiches Miga Real en tu mostrador.</p>
-                            </div>
-
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-slate-900/80 backdrop-blur-md p-6 sm:p-10 md:p-12 rounded-3xl border border-slate-800 shadow-2xl">
-                                <div className="lg:col-span-6 space-y-6 sm:space-y-8">
-                                    <div>
-                                        <label className="block text-xs sm:text-sm font-bold text-slate-200 mb-3 flex items-center justify-between">
-                                            <span>Sándwiches estimados vendidos por semana:</span>
-                                            <span className="text-amber-400 font-extrabold text-base sm:text-xl">{packCount} unidades</span>
-                                        </label>
-                                        <input 
-                                            type="range" 
-                                            min="16" 
-                                            max="100" 
-                                            step="4" 
-                                            value={packCount} 
-                                            onChange={handleSliderChange} 
-                                            className="w-full accent-amber-500 h-2 bg-slate-950 rounded-lg cursor-pointer"
-                                        />
-                                        <div className="flex justify-between text-[11px] sm:text-xs text-slate-400 mt-2 font-medium">
-                                            <span>16 un. [Mínimo]</span>
-                                            <span>50 un. (Medio)</span>
-                                            <span>100 un. (Alto)</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
-                                        <div className="bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-800 shadow-inner">
-                                            <p className="text-[11px] sm:text-xs text-slate-400 font-medium mb-1">Costo Mayorista ($2.000 c/u)</p>
-                                            <p className="text-lg sm:text-xl font-bold text-slate-100">${totalInvestment.toLocaleString('es-AR')}</p>
-                                        </div>
-                                        <div className="bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-800 shadow-inner">
-                                            <p className="text-[11px] sm:text-xs text-slate-400 font-medium mb-1">Venta al Público ($3.500 c/u)</p>
-                                            <p className="text-lg sm:text-xl font-bold text-amber-400">${totalRevenue.toLocaleString('es-AR')}</p>
-                                        </div>
-                                    </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                                <div class="bg-white p-7 rounded-3xl border border-slate-300 shadow-md">
+                                    <div class="w-12 h-12 bg-red-50 border border-red-200 text-red-600 rounded-2xl flex items-center justify-center mb-5">${ICONS.refresh}</div>
+                                    <h3 class="text-xl font-extrabold mb-2.5 text-slate-900">Reposición Programada</h3>
+                                    <p class="text-slate-700 leading-relaxed text-sm sm:text-base font-medium">Elegís qué días de la semana y en qué franja horaria querés recibir tu pedido para mantener stock fresco en heladera.</p>
                                 </div>
+                                <div class="bg-white p-7 rounded-3xl border border-slate-300 shadow-md">
+                                    <div class="w-12 h-12 bg-slate-100 border border-slate-300 text-slate-800 rounded-2xl flex items-center justify-center mb-5">${ICONS.package}</div>
+                                    <h3 class="text-xl font-extrabold mb-2.5 text-slate-900">Etiqueta Clara y Faja de Seguridad</h3>
+                                    <p class="text-slate-700 leading-relaxed text-sm sm:text-base font-medium">Bandeja cerrada con faja de seguridad, fecha de elaboración y vencimiento a la vista, ingredientes, alérgenos y temperatura de frío (2 °C a 5 °C).</p>
+                                </div>
+                                <div class="bg-white p-7 rounded-3xl border border-slate-300 shadow-md">
+                                    <div class="w-12 h-12 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-2xl flex items-center justify-center mb-5">${ICONS.utensils}</div>
+                                    <h3 class="text-xl font-extrabold mb-2.5 text-slate-900">Pack Inicial de Prueba (8 Envases)</h3>
+                                    <p class="text-slate-700 leading-relaxed text-sm sm:text-base font-medium">Si todavía no trabajás con nosotros, podés hacer tu primer pedido con solo 8 envases ($16.000) para comprobar la respuesta de tus clientes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
-                                <div className="lg:col-span-6 bg-gradient-to-br from-amber-600 to-orange-700 p-8 sm:p-10 md:p-12 rounded-3xl text-white shadow-xl flex flex-col justify-between text-center border border-amber-500/30">
-                                    <div>
-                                        <span className="inline-block px-4 py-1.5 bg-black/20 text-white rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">Ganancia Semanal Estimada</span>
-                                        <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-3">${totalProfit.toLocaleString('es-AR')}</div>
-                                        <p className="text-amber-100 text-xs sm:text-sm font-medium">Margen neto excelente para productos de alta rotación en mostrador.</p>
+                    <!-- Catálogo de Productos con Fotos Reales y Ficha Técnica Bromatológica -->
+                    <section id="productos" class="py-16 sm:py-20 bg-[#DFE3E6] border-t border-b border-slate-300">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="text-center mb-12 max-w-2xl mx-auto">
+                                <span class="text-slate-900 font-extrabold tracking-wider uppercase text-xs bg-white px-4 py-1.5 rounded-full border border-slate-300 shadow-sm">Catálogo de Fábrica • Vigente al ${PRICE_VALID_UNTIL}</span>
+                                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">Variedades y Fichas Técnicas</h2>
+                                <p class="text-slate-700 mt-3 text-base font-medium">Cada envase hermético contiene <strong>2 sándwiches triples</strong>. Tocá <em>"Ver Ficha Técnica y Rótulo"</em> en cada variedad para consultar peso neto, ingredientes y alérgenos.</p>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                                ${PRODUCTS.map(prod => {
+                                    const specOpen = state.openSpecId === prod.id;
+                                    return `
+                                        <article class="rounded-3xl p-6 border transition-all flex flex-col justify-between relative overflow-hidden ${!prod.available ? 'opacity-70 bg-slate-200 border-slate-300' : prod.isSpecial ? 'bg-white border-red-300 shadow-lg ring-1 ring-red-500/20' : 'bg-white border-slate-300 shadow-md'}">
+                                            <div>
+                                                <div class="flex justify-between items-center mb-4">
+                                                    <span class="px-3 py-1 ${prod.tagColor} rounded-lg text-xs font-extrabold uppercase">${escapeHtml(prod.badge)}</span>
+                                                    <span class="text-xs font-bold text-slate-700">220 g / 2 un.</span>
+                                                </div>
+
+                                                <div class="w-full h-44 bg-slate-100 rounded-2xl mb-4 overflow-hidden border border-slate-200 relative">
+                                                    <img src="${prod.image}" alt="Sándwich de miga de ${escapeHtml(prod.name)}" loading="lazy" decoding="async" width="400" height="176" onerror="this.style.display='none'" class="w-full h-full object-cover" />
+                                                </div>
+
+                                                <h3 class="text-xl font-extrabold text-slate-900 mb-2">${escapeHtml(prod.name)}</h3>
+                                                <p class="text-slate-700 leading-relaxed text-sm font-medium mb-4">${escapeHtml(prod.desc)}</p>
+
+                                                <button type="button" aria-expanded="${specOpen}" onclick="toggleProductSpec('${prod.id}')" class="w-full text-left text-xs font-extrabold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 px-3.5 py-2.5 rounded-xl flex items-center justify-between transition-colors mb-4">
+                                                    <span>📋 ${specOpen ? 'Ocultar datos de etiqueta' : 'Ver Ingredientes, Alérgenos y Conservación'}</span>
+                                                    <span>${specOpen ? '▲' : '▼'}</span>
+                                                </button>
+
+                                                ${specOpen ? `
+                                                    <div class="bg-slate-50 border border-slate-300 rounded-2xl p-3.5 mb-4 text-xs text-slate-800 space-y-1.5 animate-fadeIn">
+                                                        <p><strong>Presentación:</strong> ${escapeHtml(prod.pesoNeto)}</p>
+                                                        <p><strong>Conservación y vencimiento:</strong> ${escapeHtml(prod.vidaUtil)}</p>
+                                                        <p><strong>Ingredientes en etiqueta:</strong> ${escapeHtml(prod.ingredientes)}</p>
+                                                        <p class="text-red-800 font-bold"><strong>Aviso de alérgenos:</strong> ${escapeHtml(prod.alergenos)}</p>
+                                                    </div>
+                                                ` : ''}
+                                            </div>
+
+                                            <div class="pt-4 border-t border-slate-200 flex items-center justify-between text-xs font-bold">
+                                                <span class="text-slate-700">Envase cerrado x 2 un.</span>
+                                                <span class="${prod.available ? 'text-emerald-900 bg-emerald-100 border-emerald-300' : 'text-slate-700 bg-slate-200 border-slate-300'} px-3 py-1 rounded-md border font-extrabold">
+                                                    ${prod.available ? `$${prod.price.toLocaleString('es-AR')} Mayorista` : 'Próximamente'}
+                                                </span>
+                                            </div>
+                                        </article>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Testimonios de Comercios de Zona Oeste -->
+                    <section class="py-16 bg-[#ECEFF1] border-b border-slate-300">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="text-center mb-10 max-w-2xl mx-auto">
+                                <span class="text-red-700 font-extrabold tracking-wider uppercase text-xs bg-white px-4 py-1.5 rounded-full border border-slate-300 shadow-sm">Referencias Comerciales</span>
+                                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-3 tracking-tight">Comercios que ya trabajan con Miga Real</h2>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                ${TESTIMONIALS.map(t => `
+                                    <div class="bg-white p-6 rounded-3xl border border-slate-300 shadow-sm flex flex-col justify-between">
+                                        <p class="text-slate-700 text-sm sm:text-base font-medium italic mb-4">"${escapeHtml(t.comentario)}"</p>
+                                        <div class="border-t border-slate-200 pt-3">
+                                            <div class="font-extrabold text-slate-900 text-sm">${escapeHtml(t.kiosco)}</div>
+                                            <div class="text-xs font-bold text-red-700">${escapeHtml(t.zona)}</div>
+                                        </div>
                                     </div>
-                                    <div className="mt-8">
-                                        <button onClick={onNavigateToRegister} className="w-full bg-slate-950 text-white font-extrabold py-4 rounded-2xl shadow-lg hover:bg-slate-900 transition-all active:scale-95 flex items-center justify-center gap-2.5 text-base">
-                                            <FileText className="w-5 h-5" /> Realizar Pedido
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Programa de Referidos ($10.000) -->
+                    <section id="referidos" class="py-16 sm:py-20 bg-[#ECEFF1]">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="bg-[#111827] text-white rounded-3xl border-2 border-red-600 p-6 sm:p-10 md:p-12 shadow-xl">
+                                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                                    <div class="lg:col-span-7 space-y-5">
+                                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-950/90 border border-red-700 text-red-200 text-xs font-extrabold uppercase tracking-wider">
+                                            Programa de Expansión Comercial Verificado
+                                        </div>
+                                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                                            Ganate <span class="text-red-500">$10.000</span> por cada comercio nuevo que sumes
+                                        </h2>
+                                        <p class="text-slate-200 text-base font-medium leading-relaxed">
+                                            ¿Conocés otro kiosco, almacén o buffet en la zona? Pre-registralo antes de su primer pedido y cobrá <strong>$10.000 por transferencia</strong> (o descuento en tu boleta) una vez que el comercio reciba y abone su <strong>2° pedido mayorista regular (1° y 2° pedido de mínimo 16 envases cada uno)</strong>.
+                                        </p>
+
+                                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                                            <div class="bg-slate-800/90 p-4 rounded-2xl border border-slate-700">
+                                                <div class="text-xs font-extrabold text-red-300 uppercase mb-1">Paso 1 • Pre-registro</div>
+                                                <p class="text-sm font-bold text-white mb-1">Antes del 1° pedido</p>
+                                                <p class="text-xs text-slate-200 font-medium">Dejás asentados los datos del comercio con token único y fecha.</p>
+                                            </div>
+                                            <div class="bg-slate-800/90 p-4 rounded-2xl border border-slate-700">
+                                                <div class="text-xs font-extrabold text-red-300 uppercase mb-1">Paso 2 • Verificación</div>
+                                                <p class="text-sm font-bold text-white mb-1">Control en Reparto</p>
+                                                <p class="text-xs text-slate-200 font-medium">Validamos que sea un local físico nuevo (sin autorreferidos).</p>
+                                            </div>
+                                            <div class="bg-slate-800/90 p-4 rounded-2xl border border-slate-700">
+                                                <div class="text-xs font-extrabold text-emerald-300 uppercase mb-1">Paso 3 • Liquidación</div>
+                                                <p class="text-sm font-bold text-white mb-1">Al 2° Pedido Pago</p>
+                                                <p class="text-xs text-slate-200 font-medium">Cumplido el 2° pedido de 16+ envases, te transferimos los $10.000.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lg:col-span-5 bg-white text-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-300 flex flex-col justify-between space-y-6 shadow-xl">
+                                        <div>
+                                            <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-4">
+                                                <div>
+                                                    <span class="text-xs font-bold text-slate-600 uppercase">Premio por Comercio Activo</span>
+                                                    <div class="text-3xl sm:text-4xl font-extrabold text-slate-900">$10.000 <span class="text-sm font-bold text-slate-600">ARS</span></div>
+                                                </div>
+                                                <div class="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center font-extrabold text-xl">$</div>
+                                            </div>
+                                            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-800 font-semibold">
+                                                <li class="flex items-start gap-2">
+                                                    <span class="text-emerald-600 mt-0.5">${ICONS.check}</span>
+                                                    <span>Condición clara y unificada: se abona al completarse el 2° pedido regular (mín. 16 envases en el 1° y 2° pedido).</span>
+                                                </li>
+                                                <li class="flex items-start gap-2">
+                                                    <span class="text-emerald-600 mt-0.5">${ICONS.check}</span>
+                                                    <span>Doble validación: tu pre-registro + mención en la comanda del comercio recomendado.</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <button type="button" onclick="openReferralModal()" class="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-4 px-6 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 text-base active:scale-95">
+                                            Pre-registrar un Comercio Ahora
                                         </button>
                                     </div>
                                 </div>
@@ -797,91 +1157,376 @@
                         </div>
                     </section>
 
-                    <section id="faq" className="py-16 sm:py-24 bg-slate-900 font-poppins border-t border-slate-800">
-                        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="text-center mb-12 sm:mb-16">
-                                <span className="text-emerald-400 font-bold tracking-wider uppercase text-xs bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20">Resolvé tus dudas</span>
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mt-4">Preguntas Frecuentes</h2>
+                    <!-- Calculadora de Margen Bruto Semanal -->
+                    <section id="rentabilidad" class="py-16 sm:py-20 bg-[#DFE3E6] border-t border-slate-300">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="text-center mb-12 max-w-2xl mx-auto">
+                                <span class="text-red-700 font-extrabold tracking-wider uppercase text-xs bg-white px-4 py-1.5 rounded-full border border-slate-300 shadow-sm">Simulador Transparente</span>
+                                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">Calculadora de Margen Bruto Semanal</h2>
+                                <p class="text-slate-700 mt-3 text-base font-medium">Valores expresados <strong>por envase cerrado de 2 sándwiches</strong> (Costo mayorista: $${WHOLESALE_PRICE.toLocaleString('es-AR')} por envase • Precio de venta sugerido al público: $${SUGGESTED_RETAIL_PRICE.toLocaleString('es-AR')} por envase).</p>
                             </div>
-                            <div className="space-y-4">
-                                {DATA.faqItems.map((item, i) => (
-                                    <div 
-                                        key={i}
-                                        className={`bg-slate-950 rounded-2xl border transition-all duration-200 cursor-pointer overflow-hidden shadow-md ${openFaq === i ? 'border-amber-500 ring-1 ring-amber-500' : 'border-slate-800 hover:border-slate-700'}`} 
-                                        onClick={() => toggleFaq(i)}
-                                    >
-                                        <div className="flex justify-between items-center p-5 sm:p-6">
-                                            <h3 className={`text-sm sm:text-base md:text-lg font-bold pr-3 ${openFaq === i ? 'text-amber-400' : 'text-white'}`}>{item.question}</h3>
-                                            <div className={`p-1.5 rounded-full shrink-0 ${openFaq === i ? 'text-amber-400 bg-amber-500/10' : 'text-slate-400'}`}>
-                                                {openFaq === i ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                                            </div>
-                                        </div>
-                                        <div className={`transition-all duration-200 overflow-hidden ${openFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                                            <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed border-t border-slate-800/60 pt-4">{item.answer}</p>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-10 rounded-3xl border border-slate-300 shadow-lg">
+                                <div class="lg:col-span-6 space-y-6">
+                                    <div>
+                                        <label for="packs-slider" class="block text-sm sm:text-base font-extrabold text-slate-900 mb-3 flex items-center justify-between">
+                                            <span>Envases por semana:</span>
+                                            <span class="text-red-600 font-extrabold text-xl bg-slate-100 px-3 py-1 rounded-xl border border-slate-300">${state.packCount} envases (${state.packCount * 2} sándwiches)</span>
+                                        </label>
+                                        <input id="packs-slider" type="range" min="16" max="100" step="4" value="${state.packCount}" oninput="updateCalculator('packCount', this.value)" class="w-full accent-red-600 h-2.5 bg-slate-300 rounded-lg cursor-pointer" />
+                                        <div class="flex justify-between text-xs text-slate-700 mt-2 font-bold">
+                                            <span>16 envases (32 sándw.)</span>
+                                            <span>100 envases (200 sándw.)</span>
                                         </div>
                                     </div>
-                                ))}
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200">
+                                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-300">
+                                            <p class="text-xs text-slate-700 font-bold mb-1">Costo de compra (${state.packCount} env. x $2.000)</p>
+                                            <p class="text-xl font-extrabold text-slate-900">$${totalInvestment.toLocaleString('es-AR')}</p>
+                                        </div>
+                                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-300">
+                                            <p class="text-xs text-slate-700 font-bold mb-1">Facturación estimada (${state.packCount} env. x $3.500)</p>
+                                            <p class="text-xl font-extrabold text-red-600">$${totalRevenue.toLocaleString('es-AR')}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="lg:col-span-6 bg-[#111827] p-8 sm:p-10 rounded-3xl text-white flex flex-col justify-between text-center shadow-xl">
+                                    <div>
+                                        <span class="inline-block px-4 py-1 bg-red-950 text-red-200 border border-red-700 font-extrabold rounded-full text-xs uppercase tracking-wider mb-3">Margen Bruto Semanal Estimado</span>
+                                        <div class="text-4xl sm:text-5xl font-extrabold text-red-400 tracking-tight mb-2">$${grossMargin.toLocaleString('es-AR')}</div>
+                                        <p class="text-slate-200 text-xs sm:text-sm font-medium leading-relaxed">
+                                            Cálculo orientativo sobre envases de 2 sándwiches vendidos al precio sugerido de $3.500. No descuenta consumo eléctrico de heladera, impuestos ni costos fijos propios de tu local.
+                                        </p>
+                                    </div>
+                                    <div class="mt-7 space-y-2.5">
+                                        <button type="button" onclick="navigateTo('#/pedido')" class="w-full bg-red-600 hover:bg-red-500 text-white font-extrabold py-4 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 text-base">
+                                            ${ICONS.fileText} Armar Pedido en la Comanda
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
 
-                    <footer className="bg-slate-950 text-slate-300 py-12 sm:py-16 border-t border-slate-800 font-poppins text-xs sm:text-sm">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
-                                <div className="flex flex-col sm:flex-row items-center gap-4">
-                                    <BrandLogo className="w-12 h-12" />
+                    <!-- Preguntas Frecuentes Accesibles -->
+                    <section id="faq" class="py-16 sm:py-20 bg-[#ECEFF1] border-t border-slate-300">
+                        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="text-center mb-12">
+                                <span class="text-slate-800 font-extrabold tracking-wider uppercase text-xs bg-white px-4 py-1.5 rounded-full border border-slate-300 shadow-sm">Dudas Frecuentes</span>
+                                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Preguntas Frecuentes</h2>
+                            </div>
+                            <div class="space-y-4">
+                                ${FAQ_ITEMS.map((item, i) => {
+                                    const isOpen = state.openFaqIndex === i;
+                                    return `
+                                        <div class="bg-white rounded-2xl border transition-all overflow-hidden shadow-sm ${isOpen ? 'border-red-600 shadow-md ring-1 ring-red-500/20' : 'border-slate-300'}">
+                                            <h3>
+                                                <button type="button" id="faq-btn-${i}" aria-expanded="${isOpen}" aria-controls="faq-panel-${i}" onclick="toggleFaq(${i})" class="w-full flex justify-between items-center p-5 sm:p-6 text-left">
+                                                    <span class="text-base sm:text-lg font-extrabold text-slate-900 pr-4">${escapeHtml(item.question)}</span>
+                                                    <span class="p-1.5 rounded-full bg-slate-100 text-slate-800 shrink-0 font-bold text-xs" aria-hidden="true">
+                                                        ${isOpen ? '▲' : '▼'}
+                                                    </span>
+                                                </button>
+                                            </h3>
+                                            ${isOpen ? `
+                                                <div id="faq-panel-${i}" role="region" aria-labelledby="faq-btn-${i}" class="px-5 sm:px-6 pb-6 text-slate-800 text-sm sm:text-base font-medium leading-relaxed border-t border-slate-200 pt-4">
+                                                    ${escapeHtml(item.answer)}
+                                                </div>
+                                            ` : ''}
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Footer con Datos Legales y Bromatológicos -->
+                    <footer class="bg-[#111827] text-slate-200 py-12 border-t border-slate-800 text-sm">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+                                <div class="flex flex-col sm:flex-row items-center gap-4">
+                                    ${renderBrandLogo("w-12 h-12")}
                                     <div>
-                                        <span className="text-xl sm:text-2xl font-extrabold text-white">MIGA <span className="text-amber-500">REAL</span></span>
-                                        <p className="text-slate-400 mt-1 text-xs">Sándwiches de miga artesanales mayoristas.</p>
+                                        <span class="text-xl font-extrabold text-white">MIGA <span class="text-red-500">REAL</span></span>
+                                        <p class="text-slate-200 mt-1 text-xs font-medium">Elaboración y distribución mayorista de sándwiches de miga en Zona Oeste.</p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col items-center md:items-end gap-3">
-                                    <p className="text-slate-400 text-xs">¿Consultas o pedidos directos?</p>
-                                    <a href={getSecureWaLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white bg-green-600 hover:bg-green-700 px-6 py-3.5 rounded-full font-bold transition-colors shadow-lg text-xs sm:text-sm active:scale-95">
-                                        <WhatsAppIcon className="w-4 h-4" /> Hablar por WhatsApp
+                                <div class="flex flex-col items-center md:items-end gap-3">
+                                    <a href="${getWaLink()}" target="_blank" rel="noopener noreferrer" onclick="trackEvent('footer_wa_click')" class="inline-flex items-center gap-2 text-slate-950 bg-[#25D366] hover:bg-[#20ba5a] px-6 py-3.5 rounded-full font-extrabold transition-colors shadow-md text-sm">
+                                        ${ICONS.whatsapp} Atención Directa: +54 9 11 3823-5784
                                     </a>
                                 </div>
                             </div>
-                            <div className="mt-10 border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-slate-500 text-xs gap-4">
-                                <p>&copy; 2026 Miga Real. Todos los derechos reservados.</p>
-                                <div className="flex gap-6">
-                                    <button onClick={onNavigateToTerms} className="hover:text-amber-400 transition-colors">Términos y Condiciones</button>
-                                    <button onClick={onNavigateToPrivacy} className="hover:text-amber-400 transition-colors">Política de Privacidad</button>
+
+                            <!-- Bloque Societario y Bromatológico Obligatorio -->
+                            <div class="mt-8 p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-slate-200 space-y-1 text-center md:text-left">
+                                <p><strong>Elaboración:</strong> ${escapeHtml(COMPANY.razonSocial)} • ${escapeHtml(COMPANY.domicilio)}</p>
+                                <p><strong>Higiene y Seguridad Alimentaria:</strong> ${escapeHtml(COMPANY.manipulacion)}</p>
+                                <p><strong>Rotulado en Envase:</strong> ${escapeHtml(COMPANY.rotulado)}</p>
+                            </div>
+
+                            <div class="mt-8 border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-slate-200 text-xs gap-4 font-semibold">
+                                <p>&copy; 2026 Miga Real Mayorista. Precios vigentes al ${PRICE_VALID_UNTIL}.</p>
+                                <div class="flex flex-wrap justify-center gap-6">
+                                    <a href="#/terminos" class="hover:text-red-400 underline transition-colors">Reglamento y Términos Comerciales</a>
+                                    <a href="#/privacidad" class="hover:text-red-400 underline transition-colors">Política de Privacidad (Ley 25.326)</a>
                                 </div>
                             </div>
                         </div>
                     </footer>
                 </div>
-            );
+            `;
         };
 
-        const App = () => {
-            const [currentView, setCurrentView] = useState('landing');
+        // ==========================================
+        // CONTROLADORES DE INTERACCIÓN Y EVENTOS
+        // ==========================================
+        const renderApp = () => {
+            const root = document.getElementById('app');
+            if (!root) return;
+            document.title = VIEW_TITLES[state.currentView] || VIEW_TITLES.landing;
 
-            return (
-                <div className="min-h-screen bg-slate-900 text-slate-100 font-poppins">
-                    <GlobalStyles />
-                    {currentView === 'landing' && (
-                        <LandingPage 
-                            onNavigateToRegister={() => setCurrentView('register')}
-                            onNavigateToTerms={() => setCurrentView('terms')}
-                            onNavigateToPrivacy={() => setCurrentView('privacy')}
-                        />
-                    )}
-                    {currentView === 'register' && (
-                        <CommerceForm onBack={() => setCurrentView('landing')} />
-                    )}
-                    {currentView === 'terms' && (
-                        <TermsPage onBack={() => setCurrentView('landing')} />
-                    )}
-                    {currentView === 'privacy' && (
-                        <PrivacyPage onBack={() => setCurrentView('landing')} />
-                    )}
-                </div>
-            );
+            if (state.currentView === 'register') {
+                root.innerHTML = renderRegisterView();
+            } else if (state.currentView === 'terms') {
+                root.innerHTML = renderTermsView();
+            } else if (state.currentView === 'privacy') {
+                root.innerHTML = renderPrivacyView();
+            } else {
+                root.innerHTML = renderLandingView();
+            }
         };
 
-        createRoot(document.getElementById('root')).render(<App />);
+        window.navigateTo = (hash) => {
+            window.location.hash = hash;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.startTrialOrder = () => {
+            state.formData.tipoPedido = 'prueba';
+            saveStateToSession();
+            window.navigateTo('#/pedido');
+        };
+
+        window.setOrderMode = (mode) => {
+            state.formData.tipoPedido = mode;
+            state.orderError = '';
+            saveStateToSession();
+            renderApp();
+        };
+
+        window.clearOrder = () => {
+            state.order = {};
+            state.orderError = '';
+            saveStateToSession();
+            renderApp();
+        };
+
+        window.toggleMobileMenu = (force) => {
+            state.mobileMenuOpen = typeof force === 'boolean' ? force : !state.mobileMenuOpen;
+            renderApp();
+        };
+
+        window.openReferralModal = () => {
+            state.referralModalOpen = true;
+            state.referralError = '';
+            renderApp();
+        };
+
+        window.closeReferralModal = () => {
+            state.referralModalOpen = false;
+            state.referralError = '';
+            renderApp();
+        };
+
+        window.toggleProductSpec = (id) => {
+            state.openSpecId = state.openSpecId === id ? null : id;
+            renderApp();
+        };
+
+        window.toggleFaq = (idx) => {
+            state.openFaqIndex = state.openFaqIndex === idx ? null : idx;
+            renderApp();
+        };
+
+        window.updateCalculator = (field, val) => {
+            let num = parseInt(val, 10) || 0;
+            if (field === 'packCount') {
+                if (num < 16) num = 16;
+                num = Math.round(num / 4) * 4;
+            }
+            state[field] = num;
+            renderApp();
+        };
+
+        window.updateQty = (productName, delta) => {
+            const current = state.order[productName] || 0;
+            const next = Math.max(0, current + delta);
+            if (next === 0) {
+                delete state.order[productName];
+            } else {
+                state.order[productName] = next;
+            }
+            state.orderError = '';
+            saveStateToSession();
+            renderApp();
+        };
+
+        window.updateFormField = (name, value, shouldRender = false) => {
+            state.formData[name] = value;
+            saveStateToSession();
+            if (shouldRender) renderApp();
+        };
+
+        window.toggleRecurringDay = (dia) => {
+            const actuales = state.formData.diasRecurrentes || [];
+            state.formData.diasRecurrentes = actuales.includes(dia)
+                ? actuales.filter(d => d !== dia)
+                : [...actuales, dia];
+            state.daysError = false;
+            saveStateToSession();
+            renderApp();
+        };
+
+        window.submitReferralForm = async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const tuNombre = form.tuNombre.value.trim();
+            const tuWhatsapp = form.tuWhatsapp.value.trim();
+            const tuAlias = form.tuAlias.value.trim();
+            const comercioReferido = form.comercioReferido.value.trim();
+            const direccionReferido = form.direccionReferido.value.trim();
+            const contactoReferido = form.contactoReferido.value.trim();
+
+            // Validación anti-autorreferido: impide poner el mismo teléfono o nombre
+            if (normalizePhone(tuWhatsapp) && normalizePhone(tuWhatsapp) === normalizePhone(contactoReferido)) {
+                state.referralError = "El teléfono del comercio recomendado no puede coincidir con tu propio número de WhatsApp (no se admiten autorreferidos).";
+                renderApp();
+                return;
+            }
+
+            if (tuNombre.toLowerCase() === comercioReferido.toLowerCase()) {
+                state.referralError = "El nombre del comercio recomendado debe ser distinto al tuyo.";
+                renderApp();
+                return;
+            }
+
+            const token = generateSecureToken('REF');
+            const fecha = new Date().toLocaleString('es-AR');
+
+            await sendToAuditWebhook('referral_preregister', {
+                token,
+                fecha,
+                tuNombre,
+                tuWhatsapp,
+                tuAlias,
+                comercioReferido,
+                direccionReferido,
+                contactoReferido
+            });
+
+            const msg = `🔒 *PRE-REGISTRO DE REFERIDO ($10.000)*\n` +
+                `*ID de Auditoría:* ${token}\n` +
+                `*Fecha y Hora:* ${fecha}\n\n` +
+                `👤 *DATOS DEL REFERIDOR (Quien cobra):*\n` +
+                `- Nombre/Comercio: ${tuNombre}\n` +
+                `- WhatsApp: ${tuWhatsapp}\n` +
+                `- Alias/CBU: ${tuAlias}\n\n` +
+                `🏪 *NUEVO COMERCIO RECOMENDADO:*\n` +
+                `- Comercio: ${comercioReferido}\n` +
+                `- Dirección Exacta: ${direccionReferido}\n` +
+                `- WhatsApp Titular/Encargado: ${contactoReferido}\n\n` +
+                `✅ *Condición unificada aceptada:* El premio de $10.000 se liquida cuando el comercio referido reciba y abone su 2° pedido mayorista regular (1° y 2° pedido de mínimo 16 envases c/u). Declaro contar con autorización del titular para compartir su contacto.`;
+
+            state.referralModalOpen = false;
+            renderApp();
+            openWhatsApp(getWaLink(msg), 'referral_submit');
+        };
+
+        window.submitOrderForm = async (e) => {
+            e.preventDefault();
+            const minPacks = state.formData.tipoPedido === 'prueba' ? 8 : 16;
+            const totalPacks = Object.values(state.order).reduce((a, b) => a + b, 0);
+
+            if (totalPacks < minPacks) {
+                state.orderError = `Para la modalidad seleccionada (${state.formData.tipoPedido === 'prueba' ? 'Pack de Prueba de 8 envases' : 'Pedido Mayorista Regular de 16 envases'}), te faltan ${minPacks - totalPacks} envases.`;
+                renderApp();
+                return;
+            }
+
+            if (state.formData.recurrente === 'si' && (!state.formData.diasRecurrentes || state.formData.diasRecurrentes.length === 0)) {
+                state.daysError = true;
+                renderApp();
+                return;
+            }
+
+            // Bloqueo de autorreferido en comanda
+            if (state.formData.refTelefono && normalizePhone(state.formData.refTelefono) === normalizePhone(state.formData.whatsapp)) {
+                state.orderError = "El teléfono del referidor no puede ser el mismo que el WhatsApp de tu comercio.";
+                renderApp();
+                return;
+            }
+
+            const orderToken = generateSecureToken('PED');
+            const totalAmount = totalPacks * WHOLESALE_PRICE;
+            let orderLines = "";
+            for (const [prod, qty] of Object.entries(state.order)) {
+                orderLines += `- ${qty} envases (${qty * 2} sándw.) de ${prod}\n`;
+            }
+
+            const dias = state.formData.diasRecurrentes || [];
+            const subText = state.formData.recurrente === 'si'
+                ? `\n🔄 *Suscripción Recurrente:* Sí\n📅 *Días elegidos:* ${dias.join(', ')}\n🕒 *Franja horaria:* ${state.formData.franjaHoraria}`
+                : `\n🔄 *Frecuencia:* Pedido Único`;
+
+            const refText = (state.formData.refNombre || state.formData.refTelefono)
+                ? `\n🤝 *Referido por:* ${state.formData.refNombre || 'No especificado'} (Tel: ${state.formData.refTelefono || 'No especificado'})`
+                : '';
+
+            await sendToAuditWebhook('wholesale_order', {
+                orderToken,
+                modalidad: state.formData.tipoPedido,
+                totalPacks,
+                totalAmount,
+                order: state.order,
+                formData: state.formData
+            });
+
+            const message = `¡Hola Miga Real! 👋\n\n` +
+                `Quiero confirmar el siguiente pedido (${state.formData.tipoPedido === 'prueba' ? 'PACK 1° PEDIDO DE PRUEBA' : 'MAYORISTA REGULAR'}):\n` +
+                `*Código de Comanda:* ${orderToken}\n\n` +
+                `🛒 *DETALLE DEL PEDIDO*\n${orderLines}\n` +
+                `*Total Envases:* ${totalPacks} envases (${totalPacks * 2} sándwiches)\n` +
+                `*Total Estimado (precios al ${PRICE_VALID_UNTIL}):* $${totalAmount.toLocaleString('es-AR')}\n` +
+                `*Medio de Pago:* ${state.formData.medioPago}${subText}${refText}\n\n` +
+                `🏪 *DATOS DE RECEPCIÓN*\n` +
+                `*Comercio:* ${state.formData.nombreComercio}\n` +
+                `*WhatsApp:* ${state.formData.whatsapp}\n` +
+                `*Localidad:* ${state.formData.localidad}\n` +
+                `*Dirección:* ${state.formData.direccion}\n` +
+                `*Horario de atención:* ${state.formData.horario}\n\n` +
+                `Aguardo confirmación de reparto. ¡Gracias!`;
+
+            openWhatsApp(getWaLink(message), 'order_submit');
+        };
+
+        // Navegación por hash y cierre de modal con Escape
+        window.addEventListener('hashchange', () => {
+            state.currentView = ROUTES[window.location.hash] || 'landing';
+            state.mobileMenuOpen = false;
+            renderApp();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && state.referralModalOpen) {
+                window.closeReferralModal();
+            }
+        });
+
+        // Render inicial inmediato
+        renderApp();
     </script>
 </body>
 </html>
